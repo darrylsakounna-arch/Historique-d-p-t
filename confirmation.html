@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Plateforme de dépôt des mémoires</title>
+    <link rel="stylesheet" href="header-footer.css">
+    <link rel="stylesheet" href="memoires.css">
+    <style>
+    :root {
+        --fond-debut: #f4f8ff;     /* couleur de fond (début du dégradé) */
+        --fond-fin: #d9e5f7;       /* couleur de fond (fin du dégradé) */
+        --texte: #0b1e44;          /* couleur du nom et de la devise */
+        --opacite-logo: 0.60;      /* visibilité du logo */
+    }
+
+    html, body {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* ===== CARROUSEL DES UNIVERSITÉS ===== */
+    .hero {
+        flex: none;
+        position: relative;
+        height: 85vh;
+        min-height: 460px;
+        overflow: hidden;
+        color: var(--texte);
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, var(--fond-debut) 0%, var(--fond-fin) 100%);
+    }
+
+    .hero-slide {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 8%;
+        box-sizing: border-box;
+        text-align: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.8s ease, visibility 0.8s;
+    }
+
+    .hero-slide.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .hero-slide::after {
+        content: "";
+        flex: 0 0 calc(50% + 26px);
+    }
+
+    .hero-logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 78%;
+        max-width: 70%;
+        object-fit: contain;
+        opacity: var(--opacite-logo);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .hero-nom {
+        position: relative;
+        z-index: 1;
+        margin: clamp(90px, 22vh, 200px) 0 0;
+        max-width: 900px;
+        font-size: clamp(22px, 3.2vw, 40px);
+        font-weight: 700;
+        line-height: 1.25;
+    }
+
+    .hero-devise {
+        position: relative;
+        z-index: 1;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        font-size: clamp(15px, 1.8vw, 22px);
+        font-style: italic;
+    }
+
+    .hero-bouton {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 28px;
+        background-color: #1A73E8;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 8px;
+        box-shadow: 0 8px 22px rgba(26, 115, 232, 0.4);
+        transition: background-color 0.2s;
+    }
+
+    .hero-bouton:hover {
+        background-color: #1565d8;
+    }
+
+    .hero-bouton::before {
+        content: "";
+        width: 18px;
+        height: 18px;
+        background-color: currentColor;
+        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='17 8 12 3 7 8'/%3E%3Cline x1='12' y1='3' x2='12' y2='15'/%3E%3C/svg%3E") center / contain no-repeat;
+        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='17 8 12 3 7 8'/%3E%3Cline x1='12' y1='3' x2='12' y2='15'/%3E%3C/svg%3E") center / contain no-repeat;
+    }
+
+    .hero-fleche {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 4;
+        width: 44px;
+        height: 44px;
+        border: none;
+        border-radius: 10px;
+        background: rgba(11, 30, 68, 0.14);
+        color: var(--texte);
+        font-size: 22px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .hero-fleche:hover {
+        background: rgba(11, 30, 68, 0.28);
+    }
+
+    .hero-precedent { left: 20px; }
+    .hero-suivant   { right: 20px; }
+
+    .hero-points {
+        position: absolute;
+        bottom: 22px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 4;
+        display: flex;
+        gap: 8px;
+    }
+
+    .hero-point {
+        width: 10px;
+        height: 10px;
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        background: rgba(11, 30, 68, 0.25);
+        cursor: pointer;
+        transition: background 0.2s, transform 0.2s;
+    }
+
+    .hero-point.active {
+        background: var(--texte);
+        transform: scale(1.25);
+    }
+
+    @media (max-width: 600px) {
+        .hero { min-height: 420px; }
+        .hero-slide { padding: 0 14%; }
+        .hero-slide::after { flex-basis: calc(50% + 22px); }
+        .hero-nom { margin-top: 60px; }
+        .hero-logo { height: 62%; max-width: 80%; }
+        .hero-bouton { padding: 11px 16px; font-size: 13px; }
+        .hero-fleche { width: 34px; height: 34px; font-size: 18px; }
+        .hero-precedent { left: 8px; }
+        .hero-suivant   { right: 8px; }
+    }
+
+    .spinner {
+        width: 44px;
+        height: 44px;
+        border: 5px solid #d9e5f7;
+        border-top-color: #1A73E8;
+        border-radius: 50%;
+        animation: tourner 0.9s linear infinite;
+    }
+
+    @keyframes tourner {
+        to { transform: rotate(360deg); }
+    }
+    </style>
+</head>
+<body>
+    <!-- En-tête commun chargé dynamiquement -->
+    <div id="header-container"></div>
+
+    <!-- Carrousel des 4 universités publiques -->
+    <section class="hero" id="hero">
+        <!-- Champ de recherche du header affiché sur le héros en mode responsive mobile -->
+        <form class="hero-recherche-mobile" action="memoires.html" method="get" role="search">
+            <input type="search" name="q" id="hero-search-mobile-input" placeholder="Rechercher un mémoire..." aria-label="Rechercher" autocomplete="off">
+            <button type="submit" aria-label="Lancer la recherche" title="Rechercher">🔎</button>
+        </form>
+        <!-- UAC -->
+        <div class="hero-slide active">
+            <img class="hero-logo" src="images/logos-uac.png" alt="">
+            <h2 class="hero-nom">Université d'Abomey-Calavi</h2>
+            <p class="hero-devise">MENS MOLEM AGITAT</p>
+        </div>
+
+        <!-- UP -->
+        <div class="hero-slide">
+            <img class="hero-logo" src="images/logos-up.png" alt="">
+            <h2 class="hero-nom">Université de Parakou</h2>
+            <p class="hero-devise">DOCTRINA LUMEN HUMANI GENERIS EST</p>
+        </div>
+
+        <!-- UNSTIM -->
+        <div class="hero-slide">
+            <img class="hero-logo" src="images/logos-unstim.png" alt="">
+            <h2 class="hero-nom">Université Nationale des Sciences, Technologies, Ingénierie et Mathématiques</h2>
+            <p class="hero-devise">SCIENTA ET TECHNOLOGIA IN HOMINIS SERVITO</p>
+        </div>
+
+        <!-- UNA -->
+        <div class="hero-slide">
+            <img class="hero-logo" src="images/logos-una.png" alt="">
+            <h2 class="hero-nom">Université Nationale d'Agriculture</h2>
+            <p class="hero-devise">SCIENTIA INNOVATIO LAXAMENTUM</p>
+        </div>
+
+        <a href="personnel.html" class="hero-bouton">Déposer mon travail de fin d'études</a>
+
+        <button class="hero-fleche hero-precedent" aria-label="Précédent">&#10094;</button>
+        <button class="hero-fleche hero-suivant" aria-label="Suivant">&#10095;</button>
+
+        <div class="hero-points"></div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION DES 3 MÉMOIRES LES PLUS RÉCENTS (REMPLACE LE CHARGEMENT)
+         S'actualise automatiquement à chaque nouvelle soumission !
+         ===================================================================== -->
+    <section class="section-memoires" aria-label="Mémoires récemment déposés">
+        <div class="section-memoires-entete">
+            <div>
+                <h2>Mémoires récemment déposés</h2>
+                <p>Les 3 derniers travaux de fin d'études enregistrés sur la plateforme</p>
+            </div>
+        </div>
+
+        <!-- Grille contenant les 3 cadres (Université, École/Entité, Filière + page de garde + Voir plus) -->
+        <div class="grille-memoires-recents" id="grille-recents">
+            <div class="zone-chargement-memoires">
+                <div class="spinner"></div>
+                <span>Chargement des mémoires les plus récents...</span>
+            </div>
+        </div>
+
+        <!-- Bouton "Voir plus ->" en bas à droite comme sur ton croquis -->
+        <div class="zone-bouton-voir-plus">
+            <a href="memoires.html" class="bouton-voir-plus-global">
+                Voir plus <span aria-hidden="true">→</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Fenêtre modale pour consulter les détails et ouvrir le PDF d'un mémoire -->
+    <div class="modal-memoire" id="modal-memoire" hidden>
+        <div class="modal-memoire-boite" role="dialog" aria-modal="true" aria-labelledby="modal-titre">
+            <button type="button" class="modal-fermer" id="modal-fermer" aria-label="Fermer">&times;</button>
+            <h3 id="modal-titre">Détails du mémoire</h3>
+            <ul class="modal-liste-infos" id="modal-infos"></ul>
+            <div class="modal-actions">
+                <a href="#" target="_blank" rel="noopener" class="modal-btn-pdf" id="modal-lien-pdf">
+                    Ouvrir le mémoire (PDF)
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pied de page commun -->
+    <div id="footer-container"></div>
+
+    <!-- Bibliothèque PDF.js (CDN) pour dessiner la page de garde (1ère page du PDF) en haut de chaque carte -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        if (window.pdfjsLib) {
+            pdfjsLib.GlobalWorkerOptions.workerSrc =
+                "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+        }
+    </script>
+
+    <script src="header-nav.js"></script>
+    <script>
+        // 1. Chargement de l'en-tête et du pied de page
+        fetch("header.html")
+            .then(r => r.text())
+            .then(h => {
+                document.getElementById("header-container").innerHTML = h;
+                initialiserEnTeteCommun();
+            })
+            .catch(e => console.error(e));
+
+        fetch("footer.html")
+            .then(r => r.text())
+            .then(h => document.getElementById("footer-container").innerHTML = h)
+            .catch(e => console.error(e));
+
+        // 2. Gestion du carrousel des universités
+        const DUREE   = 5000;
+        const hero    = document.getElementById("hero");
+        const slides  = hero.querySelectorAll(".hero-slide");
+        const zonePts = hero.querySelector(".hero-points");
+        let index = 0;
+        let minuteur;
+
+        slides.forEach((_, i) => {
+            const p = document.createElement("button");
+            p.className = "hero-point";
+            p.setAttribute("aria-label", "Université " + (i + 1));
+            p.addEventListener("click", () => { afficher(i); demarrer(); });
+            zonePts.appendChild(p);
+        });
+        const points = zonePts.querySelectorAll(".hero-point");
+
+        function afficher(i) {
+            index = (i + slides.length) % slides.length;
+            slides.forEach((s, k) => s.classList.toggle("active", k === index));
+            points.forEach((p, k) => p.classList.toggle("active", k === index));
+        }
+
+        function demarrer() {
+            clearInterval(minuteur);
+            minuteur = setInterval(() => afficher(index + 1), DUREE);
+        }
+
+        hero.querySelector(".hero-precedent").addEventListener("click", () => { afficher(index - 1); demarrer(); });
+        hero.querySelector(".hero-suivant").addEventListener("click", () => { afficher(index + 1); demarrer(); });
+        hero.addEventListener("mouseenter", () => clearInterval(minuteur));
+        hero.addEventListener("mouseleave", demarrer);
+
+        afficher(0);
+        demarrer();
+
+        // 3. Dessin automatique de la page de garde (1ère page du PDF) dans chaque carte
+        async function dessinerPageDeGarde(urlPdf, conteneurApercu) {
+            if (!window.pdfjsLib || !urlPdf) return;
+            try {
+                const pdf  = await pdfjsLib.getDocument(urlPdf).promise;
+                const page = await pdf.getPage(1); // Page 1 = page de garde
+                const viewport = page.getViewport({ scale: 0.7 });
+
+                const canvas = document.createElement("canvas");
+                canvas.width  = viewport.width;
+                canvas.height = viewport.height;
+
+                await page.render({
+                    canvasContext: canvas.getContext("2d"),
+                    viewport: viewport
+                }).promise;
+
+                // Remplace le visuel de secours par la vraie page de garde
+                const fallback = conteneurApercu.querySelector(".carte-apercu-fallback");
+                if (fallback) fallback.remove();
+                conteneurApercu.prepend(canvas);
+            } catch (err) {
+                // En cas d'erreur de lecture PDF, on conserve simplement le visuel de secours propre
+                console.warn("Aperçu page de garde non généré :", err);
+            }
+        }
+
+        // 4. Ouverture de la fenêtre de détails quand on clique sur "Voir plus" d'une carte
+        const modal = document.getElementById("modal-memoire");
+        const modalInfos = document.getElementById("modal-infos");
+        const modalLienPdf = document.getElementById("modal-lien-pdf");
+
+        document.getElementById("modal-fermer").addEventListener("click", () => {
+            modal.hidden = true;
+        });
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) modal.hidden = true;
+        });
+
+        function ouvrirDetailsMemoire(m) {
+            document.getElementById("modal-titre").textContent =
+                `Mémoire de ${m.civilite} ${m.nom} ${m.prenom}`;
+
+            const gradeTxt = m.gradeSuperviseur ? ` (${m.gradeSuperviseur})` : "";
+
+            modalInfos.innerHTML = `
+                <li><strong>Civilité :</strong> ${m.civilite}</li>
+                <li><strong>Nom & Prénom(s) :</strong> ${m.nom} ${m.prenom}</li>
+                <li><strong>Email de l'auteur :</strong> ${m.email || "Non renseigné"}</li>
+                <li><strong>Téléphone de l'auteur :</strong> ${m.telephone || "Non renseigné"}</li>
+                <li><strong>Université :</strong> ${m.universite}</li>
+                <li><strong>Entité / École :</strong> ${m.entite}</li>
+                <li><strong>Filière :</strong> ${m.filiere}</li>
+                <li><strong>Diplôme :</strong> ${m.diplome}</li>
+                <li><strong>Année de soutenance :</strong> ${m.anneeSoutenance}</li>
+                <li><strong>Superviseur :</strong> ${m.superviseur}${gradeTxt}</li>
+                <li><strong>Email du superviseur :</strong> ${m.emailSuperviseur || "Non renseigné"}</li>
+                <li><strong>Téléphone du superviseur :</strong> ${m.telephoneSuperviseur || "Non renseigné"}</li>
+                <li><strong>Date de soumission :</strong> ${m.dateSoumission}</li>
+                <li><strong>Heure de soumission :</strong> ${m.heureSoumission}</li>
+            `;
+            modalLienPdf.href = m.urlPdf;
+            modal.hidden = false;
+        }
+
+        // 5. Chargement dynamique des 3 mémoires les plus récents depuis lister_memoires.php
+        async function chargerTroisRecents() {
+            const grille = document.getElementById("grille-recents");
+
+            try {
+                // limit=3 récupère automatiquement les 3 mémoires les plus récents
+                const reponse = await fetch("lister_memoires.php?limit=3&t=" + Date.now());
+                const data = await reponse.json();
+
+                if (!data.ok || !data.memoires.length) {
+                    grille.innerHTML = `
+                        <div class="message-aucun-memoire">
+                            <p>Aucun mémoire n'a encore été déposé sur la plateforme.</p>
+                            <a href="personnel.html">Déposer le premier mémoire</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                grille.innerHTML = "";
+
+                data.memoires.forEach((m) => {
+                    const carte = document.createElement("article");
+                    carte.className = "carte-memoire";
+
+                    carte.innerHTML = `
+                        <div class="carte-apercu">
+                            <div class="carte-apercu-fallback">
+                                <div class="icone-pdf">PDF</div>
+                                <span>Page de garde du mémoire</span>
+                            </div>
+                            <span class="carte-badge-date">${m.dateSoumission}</span>
+                        </div>
+                        <div class="carte-corps">
+                            <span class="carte-universite">${m.universite}</span>
+                            <h3 class="carte-entite">${m.entite}</h3>
+                            <p class="carte-detail"><strong>Filière :</strong> ${m.filiere}</p>
+                            <p class="carte-detail"><strong>Diplôme :</strong> ${m.diplome} (${m.anneeSoutenance})</p>
+                            <p class="carte-detail"><strong>Auteur :</strong> ${m.nom} ${m.prenom}</p>
+                        </div>
+                        <div class="carte-pied">
+                            <button type="button" class="carte-lien-voir">Voir plus</button>
+                        </div>
+                    `;
+
+                    // Clic sur "Voir plus" de cette carte
+                    carte.querySelector(".carte-lien-voir").addEventListener("click", () => {
+                        ouvrirDetailsMemoire(m);
+                    });
+
+                    grille.appendChild(carte);
+
+                    // Génération de l'aperçu de la page de garde
+                    dessinerPageDeGarde(m.urlPdf, carte.querySelector(".carte-apercu"));
+                });
+            } catch (erreur) {
+                console.error(erreur);
+                grille.innerHTML = `
+                    <div class="message-aucun-memoire">
+                        <p>Impossible de charger les mémoires pour le moment. Vérifiez que le serveur PHP est actif.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Lancement immédiat au chargement de la page
+        chargerTroisRecents();
+    </script>
+</body>
+</html>

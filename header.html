@@ -1,0 +1,107 @@
+<header class="entete-site">
+
+    <!-- Bande bleue supérieure avec contacts (desktop) -->
+    <div class="bande-superieure">
+        <div class="contenu-superieur">
+            <span>✉ contact@plateforme.bj</span>
+            <span class="entete-lieu">RP Bénin</span>
+        </div>
+    </div>
+
+    <!-- En-tête principal avec blason, ministère et menu hamburger mobile à DROITE -->
+    <div class="entete-principale">
+
+        <!-- Blason officiel (serré à gauche) -->
+        <div class="blason-conteneur">
+            <img src="images/blason-benin.png"
+                 alt="Blason officiel de la République du Bénin">
+        </div>
+
+        <!-- Partie contenant le ministère et le drapeau (serrés à gauche) -->
+        <div class="identite-institutionnelle">
+
+            <div class="zone-bleue">
+                <h1>
+                    MINISTÈRE DE L’ENSEIGNEMENT SUPÉRIEUR ET DE LA
+                    RECHERCHE SCIENTIFIQUE EN CHARGE DE LA FORMATION TECHNIQUE
+                </h1>
+            </div>
+
+            <!-- Drapeau à cheval sur les deux couleurs -->
+            <div class="drapeau-benin" aria-label="Drapeau du Bénin">
+                <div class="drapeau-vert"></div>
+                <div class="drapeau-partie-droite">
+                    <div class="drapeau-jaune"></div>
+                    <div class="drapeau-rouge"></div>
+                </div>
+            </div>
+
+            <div class="zone-blanche">
+                <h2>RÉPUBLIQUE DU BÉNIN</h2>
+            </div>
+
+        </div>
+
+        <!-- Bouton menu hamburger (3 tirets horizontaux) positionné sur la partie DROITE -->
+        <button type="button"
+                class="bouton-menu-mobile"
+                id="btn-menu-mobile"
+                aria-label="Ouvrir le menu"
+                aria-expanded="false"
+                aria-controls="menu-mobile-deroulant">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+    <!-- Menu déroulant mobile en mode "carte popup" flottante alignée à droite -->
+    <div class="menu-mobile-deroulant" id="menu-mobile-deroulant" hidden>
+        <div class="menu-mobile-conteneur-interne">
+            <a href="confirmation.html" class="menu-mobile-lien" data-page-nav="accueil">
+                🏠 Accueil
+            </a>
+            <a href="memoires.html" class="menu-mobile-lien" data-page-nav="memoires">
+                📚 Mémoires déposés
+            </a>
+            <a href="personnel.html" class="menu-mobile-lien menu-mobile-depot">
+                📤 Déposer mon travail de fin d'études
+            </a>
+            <a href="connexion.html" class="menu-mobile-lien menu-mobile-connexion" data-connexion-link="true">
+                🔑 Connexion
+            </a>
+        </div>
+    </div>
+
+    <!-- Barre de navigation principale (Desktop) -->
+    <nav class="navigation-site">
+        <!-- Groupe de gauche : Accueil + Mémoires déposés -->
+        <div class="liens-gauche-nav">
+            <a href="confirmation.html" class="lien-nav lien-accueil" data-page-nav="accueil">Accueil</a>
+            <a href="memoires.html" class="lien-nav lien-memoires" data-page-nav="memoires">Mémoires déposés</a>
+        </div>
+
+        <!-- Barre de recherche au centre -->
+        <form class="barre-recherche" action="memoires.html" method="get" role="search">
+            <input type="search" name="q" id="header-search-input" placeholder="Rechercher" aria-label="Rechercher" autocomplete="off">
+            <button type="submit" aria-label="Lancer la recherche" title="Rechercher">🔎</button>
+        </form>
+
+        <!-- Actions de droite : Connexion + Déposer mon travail de fin d'études -->
+        <div class="actions-navigation">
+            <a href="connexion.html" class="bouton-connexion" data-connexion-link="true">
+                Connexion
+            </a>
+
+            <a href="personnel.html" class="bouton-depot">
+                Déposer mon travail de fin d'études
+            </a>
+        </div>
+    </nav>
+
+    <!-- Titre de la plateforme -->
+    <div class="titre-plateforme">
+        <h2>Plateforme de dépôt des travaux de fin d'études</h2>
+    </div>
+
+</header>

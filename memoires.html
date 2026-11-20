@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tous les mémoires déposés - Plateforme</title>
+    <link rel="stylesheet" href="header-footer.css">
+    <link rel="stylesheet" href="memoires.css">
+    <style>
+        .spinner {
+            width: 44px;
+            height: 44px;
+            border: 5px solid #d9e5f7;
+            border-top-color: #1A73E8;
+            border-radius: 50%;
+            animation: tourner 0.9s linear infinite;
+        }
+        @keyframes tourner {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête commun -->
+    <div id="header-container"></div>
+
+    <!-- =====================================================================
+         HÉROS EN ARRIÈRE-PLAN (image : images/illustration-academique.png)
+         - Visibilité douce et claire comme le héros de la page d'accueil
+         - Contient le titre, le compteur, ET les zones Filtre (gauche) + Recherche (droite)
+         ===================================================================== -->
+    <section class="heros-memoires" aria-label="Présentation et filtrage des archives de mémoires">
+        <!-- Champ de recherche du header affiché sur le héros en mode responsive mobile -->
+        <form class="hero-recherche-mobile" action="memoires.html" method="get" role="search">
+            <input type="search" name="q" id="hero-search-mobile-input" placeholder="Rechercher un mémoire..." aria-label="Rechercher" autocomplete="off">
+            <button type="submit" aria-label="Lancer la recherche" title="Rechercher">🔎</button>
+        </form>
+
+        <img class="heros-memoires-bg" src="images/illustration-academique.png" alt="" aria-hidden="true">
+
+        <div class="heros-memoires-contenu">
+            <span class="heros-badge">Archives universitaires officielles</span>
+            <h1>Tous les mémoires déposés</h1>
+            <p id="compteur-memoires">Consultation des travaux de fin d'études (10 par page)</p>
+        </div>
+
+        <!-- =================================================================
+             BARRE FILTRE (À GAUCHE, PLUS LARGE) & RECHERCHE (À DROITE)
+             INTÉGRÉE SUR LE HÉROS
+             ================================================================= -->
+        <div class="zone-outils-memoires sur-heros">
+
+            <!-- Bloc Filtre en cascade à gauche (prend l'espace le plus large) -->
+            <div class="bloc-filtre-cascade" aria-label="Filtrage progressif des mémoires">
+                <div class="bloc-outil-titre">
+                    <span>Filtrer par parcours (étape par étape)</span>
+                    <button type="button" class="btn-reset-filtres" id="btn-reset-filtres" hidden>
+                        Réinitialiser
+                    </button>
+                </div>
+
+                <div class="grille-selects-cascade">
+                    <!-- 1. Université -->
+                    <div class="filtre-item">
+                        <label for="filtre-universite">1. Université</label>
+                        <select id="filtre-universite">
+                            <option value="">Toutes les universités</option>
+                        </select>
+                    </div>
+
+                    <!-- 2. Entité -->
+                    <div class="filtre-item">
+                        <label for="filtre-entite">2. Entité</label>
+                        <select id="filtre-entite" disabled>
+                            <option value="">Choisir d'abord l'université</option>
+                        </select>
+                    </div>
+
+                    <!-- 3. Filière -->
+                    <div class="filtre-item">
+                        <label for="filtre-filiere">3. Filière</label>
+                        <select id="filtre-filiere" disabled>
+                            <option value="">Choisir d'abord l'entité</option>
+                        </select>
+                    </div>
+
+                    <!-- 4. Année de soutenance -->
+                    <div class="filtre-item">
+                        <label for="filtre-annee">4. Année</label>
+                        <select id="filtre-annee" disabled>
+                            <option value="">Choisir d'abord la filière</option>
+                        </select>
+                    </div>
+
+                    <!-- 5. Superviseur -->
+                    <div class="filtre-item">
+                        <label for="filtre-superviseur">5. Superviseur</label>
+                        <select id="filtre-superviseur" disabled>
+                            <option value="">Choisir d'abord l'année</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloc Recherche rapide à droite (plus compact, recherche automatique au fil de la saisie) -->
+            <form class="bloc-recherche-droite" id="form-filtre" role="search">
+                <label class="bloc-outil-titre" for="champ-recherche">Recherche rapide</label>
+                <div class="champ-recherche-compact">
+                    <input type="search" id="champ-recherche" placeholder="Nom, thème, filière..." autocomplete="off">
+                    <button type="submit" aria-label="Rechercher" title="Rechercher">🔎</button>
+                </div>
+            </form>
+
+        </div>
+    </section>
+
+    <main class="section-memoires section-memoires-archives">
+
+        <!-- Grille de 10 mémoires maximum par page -->
+        <div class="grille-memoires-tous" id="grille-tous">
+            <div class="zone-chargement-memoires">
+                <div class="spinner"></div>
+                <span>Chargement des mémoires...</span>
+            </div>
+        </div>
+
+        <!-- =================================================================
+             PAGINATION :
+             - À gauche : Précédent (couleur grise)
+             - Au milieu : Page 1 sur 1
+             - À droite : Suivant (couleur bleue conservée)
+             ================================================================= -->
+        <nav class="pagination-memoires pagination-trois-zones" id="pagination" aria-label="Navigation des pages de mémoires" hidden>
+            <button type="button" class="btn-pagination btn-pagination-precedent" id="btn-precedent">
+                ← Précédent
+            </button>
+
+            <span class="pagination-info" id="pagination-info">Page 1 sur 1</span>
+
+            <button type="button" class="btn-pagination btn-pagination-suivant" id="btn-suivant">
+                Suivant →
+            </button>
+        </nav>
+    </main>
+
+    <!-- Fenêtre modale pour afficher toutes les informations (sauf date de naissance et documents) -->
+    <div class="modal-memoire" id="modal-memoire" hidden>
+        <div class="modal-memoire-boite" role="dialog" aria-modal="true" aria-labelledby="modal-titre">
+            <button type="button" class="modal-fermer" id="modal-fermer" aria-label="Fermer">&times;</button>
+            <h3 id="modal-titre">Détails du mémoire</h3>
+            <ul class="modal-liste-infos" id="modal-infos"></ul>
+            <div class="modal-actions">
+                <a href="#" target="_blank" rel="noopener" class="modal-btn-pdf" id="modal-lien-pdf">
+                    Ouvrir le mémoire (PDF)
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pied de page commun -->
+    <div id="footer-container"></div>
+
+    <!-- PDF.js pour afficher la page de garde (page 1) sur chaque cadre -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        if (window.pdfjsLib) {
+            pdfjsLib.GlobalWorkerOptions.workerSrc =
+                "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+        }
+    </script>
+
+    <script src="header-nav.js"></script>
+    <script>
+        // 1. Chargement de l'en-tête et du pied de page
+        fetch("header.html")
+            .then(r => r.text())
+            .then(h => {
+                document.getElementById("header-container").innerHTML = h;
+                initialiserEnTeteCommun({
+                    onSearchInput: (valeur) => {
+                        // Synchronise avec le champ Recherche rapide et lance la recherche automatiquement
+                        champRecherche.value = valeur;
+                        synchroniserFiltresCascade();
+                        chargerPageMemoires(1, false);
+                    }
+                });
+            })
+            .catch(e => console.error(e));
+
+        fetch("footer.html")
+            .then(r => r.text())
+            .then(h => document.getElementById("footer-container").innerHTML = h)
+            .catch(e => console.error(e));
+
+        // 2. Variables d'état : 10 mémoires par page
+        const MEMOIRES_PAR_PAGE = 10;
+        let pageActuelle = 1;
+        let totalPages = 1;
+        let catalogueMemoires = [];
+
+        const paramsUrl = new URLSearchParams(window.location.search);
+        const champRecherche = document.getElementById("champ-recherche");
+        champRecherche.value = paramsUrl.get("q") || "";
+
+        // Références des 5 listes du filtre en cascade
+        const selUniversite  = document.getElementById("filtre-universite");
+        const selEntite      = document.getElementById("filtre-entite");
+        const selFiliere     = document.getElementById("filtre-filiere");
+        const selAnnee       = document.getElementById("filtre-annee");
+        const selSuperviseur = document.getElementById("filtre-superviseur");
+        const btnReset       = document.getElementById("btn-reset-filtres");
+
+        function valeursUniques(liste, cle) {
+            const vus = new Set();
+            const resultat = [];
+            liste.forEach(item => {
+                const val = (item[cle] || "").trim();
+                if (val && !vus.has(val.toLowerCase())) {
+                    vus.add(val.toLowerCase());
+                    resultat.push(val);
+                }
+            });
+            return resultat.sort((a, b) => a.localeCompare(b, "fr", { sensitivity: "base" }));
+        }
+
+        function remplirSelect(selectEl, options, placeholder, valeurActive) {
+            selectEl.innerHTML = "";
+            const optDefaut = document.createElement("option");
+            optDefaut.value = "";
+            optDefaut.textContent = placeholder;
+            selectEl.appendChild(optDefaut);
+
+            options.forEach(val => {
+                const opt = document.createElement("option");
+                opt.value = val;
+                opt.textContent = val;
+                selectEl.appendChild(opt);
+            });
+
+            if (valeurActive && options.some(o => o.toLowerCase() === valeurActive.toLowerCase())) {
+                selectEl.value = options.find(o => o.toLowerCase() === valeurActive.toLowerCase());
+            } else {
+                selectEl.value = "";
+            }
+        }
+
+        // Actualisation automatique des 5 listes en cascade :
+        // Université -> Entité -> Filière -> Année -> Superviseur
+        function synchroniserFiltresCascade() {
+            const uVal = selUniversite.value;
+            const eVal = selEntite.value;
+            const fVal = selFiliere.value;
+            const aVal = selAnnee.value;
+            const sVal = selSuperviseur.value;
+
+            // 1. Universités disponibles
+            const universites = valeursUniques(catalogueMemoires, "universite");
+            remplirSelect(selUniversite, universites, "Toutes les universités", uVal);
+
+            // 2. Entités débloquées si une université est choisie
+            if (!selUniversite.value) {
+                selEntite.disabled = true;
+                remplirSelect(selEntite, [], "Choisir d'abord l'université", "");
+            } else {
+                const sousListeU = catalogueMemoires.filter(m => m.universite.toLowerCase() === selUniversite.value.toLowerCase());
+                const entites = valeursUniques(sousListeU, "entite");
+                selEntite.disabled = false;
+                remplirSelect(selEntite, entites, "Toutes les entités", eVal);
+            }
+
+            // 3. Filières débloquées si une entité est choisie
+            if (!selEntite.value) {
+                selFiliere.disabled = true;
+                remplirSelect(selFiliere, [], "Choisir d'abord l'entité", "");
+            } else {
+                const sousListeE = catalogueMemoires.filter(m =>
+                    m.universite.toLowerCase() === selUniversite.value.toLowerCase() &&
+                    m.entite.toLowerCase() === selEntite.value.toLowerCase()
+                );
+                const filieres = valeursUniques(sousListeE, "filiere");
+                selFiliere.disabled = false;
+                remplirSelect(selFiliere, filieres, "Toutes les filières", fVal);
+            }
+
+            // 4. Années de soutenance débloquées si une filière est choisie
+            if (!selFiliere.value) {
+                selAnnee.disabled = true;
+                remplirSelect(selAnnee, [], "Choisir d'abord la filière", "");
+            } else {
+                const sousListeF = catalogueMemoires.filter(m =>
+                    m.universite.toLowerCase() === selUniversite.value.toLowerCase() &&
+                    m.entite.toLowerCase() === selEntite.value.toLowerCase() &&
+                    m.filiere.toLowerCase() === selFiliere.value.toLowerCase()
+                );
+                const annees = valeursUniques(sousListeF, "anneeSoutenance").reverse();
+                selAnnee.disabled = false;
+                remplirSelect(selAnnee, annees, "Toutes les années", aVal);
+            }
+
+            // 5. Superviseurs débloqués si une année est choisie
+            if (!selAnnee.value) {
+                selSuperviseur.disabled = true;
+                remplirSelect(selSuperviseur, [], "Choisir d'abord l'année", "");
+            } else {
+                const sousListeA = catalogueMemoires.filter(m =>
+                    m.universite.toLowerCase() === selUniversite.value.toLowerCase() &&
+                    m.entite.toLowerCase() === selEntite.value.toLowerCase() &&
+                    m.filiere.toLowerCase() === selFiliere.value.toLowerCase() &&
+                    m.anneeSoutenance.toLowerCase() === selAnnee.value.toLowerCase()
+                );
+                const superviseurs = valeursUniques(sousListeA, "superviseur");
+                selSuperviseur.disabled = false;
+                remplirSelect(selSuperviseur, superviseurs, "Tous les superviseurs", sVal);
+            }
+
+            const auMoinsUnFiltre = Boolean(
+                selUniversite.value || selEntite.value || selFiliere.value || selAnnee.value || selSuperviseur.value || champRecherche.value.trim()
+            );
+            btnReset.hidden = !auMoinsUnFiltre;
+        }
+
+        // Événements de cascade automatique
+        selUniversite.addEventListener("change", () => {
+            selEntite.value = "";
+            selFiliere.value = "";
+            selAnnee.value = "";
+            selSuperviseur.value = "";
+            synchroniserFiltresCascade();
+            chargerPageMemoires(1);
+        });
+
+        selEntite.addEventListener("change", () => {
+            selFiliere.value = "";
+            selAnnee.value = "";
+            selSuperviseur.value = "";
+            synchroniserFiltresCascade();
+            chargerPageMemoires(1);
+        });
+
+        selFiliere.addEventListener("change", () => {
+            selAnnee.value = "";
+            selSuperviseur.value = "";
+            synchroniserFiltresCascade();
+            chargerPageMemoires(1);
+        });
+
+        selAnnee.addEventListener("change", () => {
+            selSuperviseur.value = "";
+            synchroniserFiltresCascade();
+            chargerPageMemoires(1);
+        });
+
+        selSuperviseur.addEventListener("change", () => {
+            synchroniserFiltresCascade();
+            chargerPageMemoires(1);
+        });
+
+        btnReset.addEventListener("click", () => {
+            selUniversite.value = "";
+            selEntite.value = "";
+            selFiliere.value = "";
+            selAnnee.value = "";
+            selSuperviseur.value = "";
+            champRecherche.value = "";
+            const headerInput = document.getElementById("header-search-input");
+            const heroMobileInput = document.getElementById("hero-search-mobile-input");
+            if (headerInput) headerInput.value = "";
+            if (heroMobileInput) heroMobileInput.value = "";
+            synchroniserFiltresCascade();
+            chargerPageMemoires(1);
+        });
+
+        // 3. Génération de la page de garde du PDF
+        async function dessinerPageDeGarde(urlPdf, conteneurApercu) {
+            if (!window.pdfjsLib || !urlPdf) return;
+            try {
+                const pdf  = await pdfjsLib.getDocument(urlPdf).promise;
+                const page = await pdf.getPage(1);
+                const viewport = page.getViewport({ scale: 0.7 });
+
+                const canvas = document.createElement("canvas");
+                canvas.width  = viewport.width;
+                canvas.height = viewport.height;
+
+                await page.render({
+                    canvasContext: canvas.getContext("2d"),
+                    viewport: viewport
+                }).promise;
+
+                const fallback = conteneurApercu.querySelector(".carte-apercu-fallback");
+                if (fallback) fallback.remove();
+                conteneurApercu.prepend(canvas);
+            } catch (err) {
+                console.warn("Aperçu page de garde non généré :", err);
+            }
+        }
+
+        // 4. Modale "Voir plus" : affiche toutes les informations SAUF date de naissance et les documents
+        const modal = document.getElementById("modal-memoire");
+        const modalInfos = document.getElementById("modal-infos");
+        const modalLienPdf = document.getElementById("modal-lien-pdf");
+
+        document.getElementById("modal-fermer").addEventListener("click", () => {
+            modal.hidden = true;
+        });
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) modal.hidden = true;
+        });
+
+        function ouvrirDetailsMemoire(m) {
+            document.getElementById("modal-titre").textContent =
+                `Mémoire de ${m.civilite} ${m.nom} ${m.prenom}`;
+
+            const gradeTxt = m.gradeSuperviseur ? ` (${m.gradeSuperviseur})` : "";
+
+            modalInfos.innerHTML = `
+                <li><strong>Civilité :</strong> ${m.civilite}</li>
+                <li><strong>Nom & Prénom(s) :</strong> ${m.nom} ${m.prenom}</li>
+                <li><strong>Email de l'auteur :</strong> ${m.email || "Non renseigné"}</li>
+                <li><strong>Téléphone de l'auteur :</strong> ${m.telephone || "Non renseigné"}</li>
+                <li><strong>Université :</strong> ${m.universite}</li>
+                <li><strong>Entité / École :</strong> ${m.entite}</li>
+                <li><strong>Filière :</strong> ${m.filiere}</li>
+                <li><strong>Diplôme :</strong> ${m.diplome}</li>
+                <li><strong>Année de soutenance :</strong> ${m.anneeSoutenance}</li>
+                <li><strong>Superviseur :</strong> ${m.superviseur}${gradeTxt}</li>
+                <li><strong>Email du superviseur :</strong> ${m.emailSuperviseur || "Non renseigné"}</li>
+                <li><strong>Téléphone du superviseur :</strong> ${m.telephoneSuperviseur || "Non renseigné"}</li>
+                <li><strong>Date de soumission :</strong> ${m.dateSoumission}</li>
+                <li><strong>Heure de soumission :</strong> ${m.heureSoumission}</li>
+            `;
+            modalLienPdf.href = m.urlPdf;
+            modal.hidden = false;
+        }
+
+        // 5. Chargement d'une page de 10 mémoires
+        async function chargerPageMemoires(page, defilerHaut = true) {
+            const grille = document.getElementById("grille-tous");
+            const pagination = document.getElementById("pagination");
+            const motCle = champRecherche.value.trim();
+
+            if (defilerHaut) {
+                grille.innerHTML = `
+                    <div class="zone-chargement-memoires">
+                        <div class="spinner"></div>
+                        <span>Chargement de la page ${page}...</span>
+                    </div>
+                `;
+            }
+
+            try {
+                const params = new URLSearchParams({
+                    limit: String(MEMOIRES_PAR_PAGE),
+                    page: String(page),
+                    q: motCle,
+                    universite: selUniversite.value,
+                    entite: selEntite.value,
+                    filiere: selFiliere.value,
+                    annee: selAnnee.value,
+                    superviseur: selSuperviseur.value,
+                    t: String(Date.now())
+                });
+
+                const reponse = await fetch("lister_memoires.php?" + params.toString());
+                const data = await reponse.json();
+
+                if (Array.isArray(data.catalogue)) {
+                    catalogueMemoires = data.catalogue;
+                    synchroniserFiltresCascade();
+                }
+
+                if (!data.ok || !data.memoires.length) {
+                    pagination.hidden = true;
+                    document.getElementById("compteur-memoires").textContent = "0 mémoire trouvé";
+                    grille.innerHTML = `
+                        <div class="message-aucun-memoire">
+                            <p>Aucun mémoire ne correspond à ces critères.</p>
+                            <a href="memoires.html">Afficher tous les mémoires</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                pageActuelle = data.page;
+                totalPages   = data.totalPages;
+
+                document.getElementById("compteur-memoires").textContent =
+                    `${data.total} mémoire(s) déposé(s) — Affichage de 10 par page`;
+
+                grille.innerHTML = "";
+
+                data.memoires.forEach((m) => {
+                    const carte = document.createElement("article");
+                    carte.className = "carte-memoire";
+
+                    carte.innerHTML = `
+                        <div class="carte-apercu">
+                            <div class="carte-apercu-fallback">
+                                <div class="icone-pdf">PDF</div>
+                                <span>Page de garde du mémoire</span>
+                            </div>
+                            <span class="carte-badge-date">${m.dateSoumission}</span>
+                        </div>
+                        <div class="carte-corps">
+                            <span class="carte-universite">${m.universite}</span>
+                            <h3 class="carte-entite">${m.entite}</h3>
+                            <p class="carte-detail"><strong>Filière :</strong> ${m.filiere}</p>
+                            <p class="carte-detail"><strong>Diplôme :</strong> ${m.diplome} (${m.anneeSoutenance})</p>
+                            <p class="carte-detail"><strong>Auteur :</strong> ${m.nom} ${m.prenom}</p>
+                        </div>
+                        <div class="carte-pied">
+                            <button type="button" class="carte-lien-voir">Voir plus</button>
+                        </div>
+                    `;
+
+                    carte.querySelector(".carte-lien-voir").addEventListener("click", () => {
+                        ouvrirDetailsMemoire(m);
+                    });
+
+                    grille.appendChild(carte);
+                    dessinerPageDeGarde(m.urlPdf, carte.querySelector(".carte-apercu"));
+                });
+
+                // Mise à jour de la pagination (Précédent à gauche en gris, Page X sur Y au milieu, Suivant à droite en bleu)
+                pagination.hidden = false;
+                document.getElementById("pagination-info").textContent =
+                    `Page ${pageActuelle} sur ${totalPages}`;
+                document.getElementById("btn-precedent").disabled = pageActuelle <= 1;
+                document.getElementById("btn-suivant").disabled   = pageActuelle >= totalPages;
+
+                if (defilerHaut) {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+            } catch (erreur) {
+                console.error(erreur);
+                grille.innerHTML = `
+                    <div class="message-aucun-memoire">
+                        <p>Erreur de communication avec le serveur PHP.</p>
+                    </div>
+                `;
+            }
+        }
+
+        document.getElementById("btn-precedent").addEventListener("click", () => {
+            if (pageActuelle > 1) chargerPageMemoires(pageActuelle - 1);
+        });
+
+        document.getElementById("btn-suivant").addEventListener("click", () => {
+            if (pageActuelle < totalPages) chargerPageMemoires(pageActuelle + 1);
+        });
+
+        // Recherche automatique au fil de la saisie dans le champ "Recherche rapide"
+        let chronoRechercheRapide;
+        champRecherche.addEventListener("input", () => {
+            const val = champRecherche.value;
+            const headerInput = document.getElementById("header-search-input");
+            const heroMobileInput = document.getElementById("hero-search-mobile-input");
+            if (headerInput && headerInput.value !== val) headerInput.value = val;
+            if (heroMobileInput && heroMobileInput.value !== val) heroMobileInput.value = val;
+
+            clearTimeout(chronoRechercheRapide);
+            chronoRechercheRapide = setTimeout(() => {
+                synchroniserFiltresCascade();
+                chargerPageMemoires(1, false);
+            }, 300);
+        });
+
+        document.getElementById("form-filtre").addEventListener("submit", (e) => {
+            e.preventDefault();
+            synchroniserFiltresCascade();
+            chargerPageMemoires(1, false);
+        });
+
+        // Chargement initial
+        chargerPageMemoires(1, false);
+    </script>
+</body>
+</html>

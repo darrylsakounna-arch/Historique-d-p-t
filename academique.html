@@ -1,0 +1,258 @@
+<!-- ==========================================================================
+     FICHIER : academique.html (Étape 2/4)
+     RÔLE : Saisie de l'université, entité, filière et diplôme (Précédent -> personnel.html / Suivant -> superviseur.html)
+     ========================================================================== -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Soumission de mémoire - Informations académiques</title>
+</head>
+<body data-page="academique">
+
+    <header class="entete">
+        <div class="logo">
+            <a href="confirmation.html" title="Retour à l'accueil">
+                <img src="images/icone-header.png" alt="Logo de l'université">
+            </a>
+        </div>
+        <div class="titre-entete">
+            <h1>SOUMISSION DE MÉMOIRE CORRIGÉ</h1>
+            <p>Plateforme de dépôt des mémoires universitaires</p>
+        </div>
+    </header>
+
+    <div class="barre-retour-accueil">
+        <a href="confirmation.html" class="bouton-retour-accueil">
+            <span class="fleche-retour" aria-hidden="true">←</span>
+            <span>Retour à l'accueil</span>
+        </a>
+    </div>
+
+
+    <div class="progression">
+        <div class="etape" data-step="personnel">
+            <div class="icone-etape">
+                <img src="images/icone-personnel.svg" alt="">
+                <span class="coche-etape">✓</span>
+            </div>
+            <p>Informations personnelles</p>
+        </div>
+
+        <div class="ligne-progression"></div>
+
+        <div class="etape" data-step="academique">
+            <div class="icone-etape">
+                <img src="images/icone-diplome.svg" alt="">
+                <span class="coche-etape">✓</span>
+            </div>
+            <p>Informations académiques</p>
+        </div>
+
+        <div class="ligne-progression"></div>
+
+        <div class="etape" data-step="superviseur">
+            <div class="icone-etape">
+                <img src="images/icone-superviseur.svg" alt="">
+                <span class="coche-etape">✓</span>
+            </div>
+            <p>Informations superviseur</p>
+        </div>
+
+        <div class="ligne-progression"></div>
+
+        <div class="etape" data-step="documents">
+            <div class="icone-etape">
+                <img src="images/icone-documents.svg" alt="">
+                <span class="coche-etape">✓</span>
+            </div>
+            <p>Documents à fournir</p>
+        </div>
+    </div>
+
+    <main class="contenu-principal">
+
+        <aside class="illustration">
+            <img src="images/illustration-academique.png" alt="Illustration académique">
+            <h2>Votre parcours académique</h2>
+            <p>Renseignez les informations relatives à votre université, votre entité, votre filière et votre diplôme.</p>
+        </aside>
+
+        <section class="contact">
+
+            <div class="option">
+                <h2>INFORMATIONS ACADÉMIQUES</h2>
+            </div>
+
+            <form class="formulaire" action="superviseur.html" method="get">
+
+                <div class="champ">
+                    <label for="universite">UNIVERSITÉ<span>*</span></label>
+                    <select id="universite" name="UNIVERSITE" required>
+                        <option value="">Choisir</option>
+                        <option value="UAC">Université d'Abomey-Calavi (UAC)</option>
+                        <option value="UP">Université de Parakou (UP)</option>
+                        <option value="UNSTIM">Université Nationale des Sciences, Technologies, Ingénierie et Mathématiques (UNSTIM)</option>
+                        <option value="UNA">Université Nationale d'Agriculture (UNA)</option>
+                        <option value="AUTRE">Autre</option>
+                    </select>
+                </div>
+
+                <div class="champ">
+                    <label for="universite-autre">Nom de l'université (si autre)<span>*</span></label>
+                    <input type="text" id="universite-autre" name="universite-autre" placeholder="Ex. : Université de ...">
+                </div>
+
+                <div class="champ">
+                    <label for="entite-uac">Entité<span>*</span></label>
+                    <select id="entite-uac" name="entite-uac" required>
+                        <option value="">Choisir une entité de l'UAC</option>
+                        <option value="INJEPS">Institut National de la Jeunesse de l'Éducation Physique et Sportive (INJEPS)</option>
+                        <option value="ENS">École Normale Supérieure (ENS)</option>
+                        <option value="FADESP">Faculté de Droit et de Science Politique (FADESP)</option>
+                        <option value="FASEG">Faculté des Sciences Économiques et de Gestion (FASEG)</option>
+                        <option value="FAST">Faculté des Sciences Techniques (FAST)</option>
+                        <option value="Institut Confucius">Institut Confucius</option>
+                        <option value="ENEAM">École Nationale d'Économie Appliquée et de Management (ENEAM)</option>
+                        <option value="IFRI">Institut de Formation et de Recherche en Informatique (IFRI)</option>
+                        <option value="IRSP">Institut Régional de Santé Publique (IRSP)</option>
+                        <option value="FLASH">Faculté des Lettres, Arts et Sciences Humaines-Adjarra (FLASH)</option>
+                        <option value="IMSP">Institut de Mathématiques et de Sciences Physiques (IMSP)</option>
+                        <option value="FLLAC">Faculté des Lettres, Langues, Arts et Communications (FLLAC)</option>
+                        <option value="INMAAC">Institut National des Métiers d'Arts, d'Archéologie et de la Culture (INMAAC)</option>
+                        <option value="CIFRED">Centre Inter Facultaire de Formation et de Recherche en Environnement pour le Développement Durable (CIFRED)</option>
+                        <option value="Institut de Cadre de Vie">Institut de Cadre de Vie (Ex. IGATE)</option>
+                        <option value="INMeS">Institut National Médico-Sanitaire (INMeS)</option>
+                        <option value="INE">Institut National de l'Eau (INE)</option>
+                        <option value="EPA">École du Patrimoine Africain (EPA)</option>
+                        <option value="FASHS">Faculté des Sciences Humaines et Sociales (FASHS)</option>
+                        <option value="ENSTIC">École Nationale des Sciences et Techniques de l'Information et de la Communication (ENSTIC)</option>
+                        <option value="ENA">École Nationale d'Administration (ENA)</option>
+                        <option value="FSA">Faculté des Sciences Agronomiques (FSA)</option>
+                        <option value="FSS">Faculté des Sciences de la Santé (FSS)</option>
+                        <option value="EPAC">École Polytechnique d'Abomey-Calavi (EPAC)</option>
+                        <option value="CEFORP">Centre de Formation et de Recherche en matière de Population (CEFORP)</option>
+                        <option value="HERCI">Haute École Régionale de Commerce International (HERCI)</option>
+                    </select>
+                </div>
+
+                <div class="champ">
+                    <label for="entite-up">Entité<span>*</span></label>
+                    <select id="entite-up" name="entite-up" required>
+                        <option value="">Choisir une entité de l'UP</option>
+                        <option value="FA">Faculté d'Agronomie (FA)</option>
+                        <option value="FM">Faculté de Médecine (FM)</option>
+                        <option value="ENATSE">École Nationale de Formation des Techniciens Supérieurs en Santé Publique et Surveillance Épidémiologique (ENATSE)</option>
+                        <option value="IFSIO">Institut de Formation en Soins Infirmiers et Obstétricaux (IFSIO)</option>
+                        <option value="IUT">Institut Universitaire de Technologie (IUT)</option>
+                        <option value="ENSPD">École Nationale de Statistique, de Planification et de Démographie (ENSPD)</option>
+                        <option value="FASEG">Faculté des Sciences Économiques et de Gestion (FASEG)</option>
+                        <option value="FDSP">Faculté de Droit et Sciences Politiques (FDSP)</option>
+                        <option value="FLASH">Faculté des Lettres, Arts et Sciences Humaines (FLASH)</option>
+                    </select>
+                </div>
+
+                <div class="champ">
+                    <label for="entite-unstim">Entité<span>*</span></label>
+                    <select id="entite-unstim" name="entite-unstim" required>
+                        <option value="">Choisir une entité de l'UNSTIM</option>
+                        <option value="ENSET">École Normale Supérieure de l'Enseignement Technique (ENSET)</option>
+                        <option value="INSTI">Institut National Supérieur de Technologie Industrielle (INSTI)</option>
+                        <option value="INSPEI">Institut National Supérieur des Classes Préparatoires aux Études d'Ingénieurs (INSPEI)</option>
+                        <option value="ENS/Nati">École Normale Supérieure de Natitingou (ENS/Nati)</option>
+                        <option value="ENSBBA">École Nationale Supérieure des Biosciences et Biotechnologies Appliquées (ENSBBA)</option>
+                        <option value="FAST/Nati">Faculté des Sciences et Techniques de Natitingou (FAST/Nati)</option>
+                        <option value="ENSGEP">École Nationale Supérieure de Génie Énergétique et Procédés (ENSGEP)</option>
+                        <option value="ENSTP">École Nationale Supérieure des Travaux Publics (ENSTP)</option>
+                    </select>
+                </div>
+
+                <div class="champ">
+                    <label for="entite-una">Entité<span>*</span></label>
+                    <select id="entite-una" name="entite-una" required>
+                        <option value="">Choisir une entité de l'UNA</option>
+                        <option value="EAq">École d'Aquaculture (EAq)</option>
+                        <option value="EHAEV">École d'Horticulture et d'Aménagement des Espaces Verts (EHAEV)</option>
+                        <option value="EGPVS">École de Gestion et de Production Végétale et Semencière (EGPVS)</option>
+                        <option value="ESTCTPA">École des Sciences et Techniques de Conservation et de Transformation des Produits Agricoles (ESTCTPA)</option>
+                        <option value="EGR">École de Génie Rural (EGR)</option>
+                        <option value="EGESE">École de Gestion et d'Exploitation des Systèmes d'Élevage (EGESE)</option>
+                        <option value="EAPA">École d'Agrobusiness et de Politiques Agricoles (EAPA)</option>
+                        <option value="ESRVA">École de Sociologie Rurale et de Vulgarisation Agricole (ESRVA)</option>
+                        <option value="EForT">École de Foresterie Tropicale (EForT)</option>
+                    </select>
+                </div>
+
+                <div class="champ">
+                    <label for="entite-autre">Autre entité<span>*</span></label>
+                    <input type="text" id="entite-autre" name="entite-autre" placeholder="Ex. : Entité ou faculté de ...">
+                </div>
+
+                <div class="champ">
+                    <label for="filiere">Filière<span>*</span></label>
+                    <input type="text" id="filiere" name="filiere" placeholder="Ex. : Froid et climatisation" required>
+                </div>
+
+                <div class="champ">
+                    <label for="annee-soutenance">Année de soutenance<span>*</span></label>
+                    <select id="annee-soutenance" name="annee-soutenance" required>
+                        <option value="">Choisir</option>
+                    </select>
+                </div>
+
+                <div class="champ">
+                    <label for="diplome">Diplôme obtenu<span>*</span></label>
+                    <select id="diplome" name="diplome" required>
+                        <option value="">Choisir</option>
+                        <option value="Licence">Licence</option>
+                        <option value="Licence Professionnel">Licence Professionnelle</option>
+                        <option value="Master">Master</option>
+                        <option value="Ingenieur conception">Ingénieur de conception</option>
+                        <option value="Doctorat">Doctorat</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+
+                <div class="champ">
+                    <label for="diplome-autre">Précisez le diplôme (si autre)<span>*</span></label>
+                    <input type="text" id="diplome-autre" name="diplome-autre" placeholder="Ex. : BTS ...">
+                </div>
+
+                <div class="boutonsLigne">
+
+                    <a class="precedentButton" href="personnel.html">
+                        Précédent
+                        <div class="iconeButton">
+                            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                    </a>
+
+                    <button type="submit" class="suivantButton">
+                        Suivant
+                        <div class="iconButton">
+                            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                    </button>
+
+                </div>
+
+            </form>
+        </section>
+    </main>
+
+    <footer class="pied-page">
+        <p>© 2026 - Plateforme de soumission des mémoires universitaires</p>
+        <p>Tous droits réservés.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

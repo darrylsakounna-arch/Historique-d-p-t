@@ -1,0 +1,146 @@
+<!-- ==========================================================================
+     FICHIER : document.html (Étape 4/4)
+     RÔLE : Dépôt des fichiers PDF et envoi vers traitement.php, puis redirection vers confirmation.html
+     ========================================================================== -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Documents à fournir</title>
+</head>
+<body data-page="documents">
+
+    <header class="entete">
+        <div class="logo">
+            <a href="confirmation.html" title="Retour à l'accueil">
+                <img src="images/icone-header.png" alt="Logo de l'université">
+            </a>
+        </div>
+        <div class="titre-entete">
+            <h1>SOUMISSION DE MÉMOIRE CORRIGÉ</h1>
+            <p>Plateforme de dépôt des mémoires universitaires</p>
+        </div>
+    </header>
+
+    <div class="barre-retour-accueil">
+        <a href="confirmation.html" class="bouton-retour-accueil">
+            <span class="fleche-retour" aria-hidden="true">←</span>
+            <span>Retour à l'accueil</span>
+        </a>
+    </div>
+
+
+    <div class="progression">
+        <div class="etape" data-step="personnel">
+            <div class="icone-etape">
+                <img src="images/icone-personnel.svg" alt="">
+                <span class="coche-etape">✓</span>
+            </div>
+            <p>Informations personnelles</p>
+        </div>
+
+        <div class="ligne-progression"></div>
+
+        <div class="etape" data-step="academique">
+            <div class="icone-etape">
+                <img src="images/icone-diplome.svg" alt="">
+                <span class="coche-etape">✓</span>
+            </div>
+            <p>Informations académiques</p>
+        </div>
+
+        <div class="ligne-progression"></div>
+
+        <div class="etape" data-step="superviseur">
+            <div class="icone-etape">
+                <img src="images/icone-superviseur.svg" alt="">
+                <span class="coche-etape">✓</span>
+            </div>
+            <p>Informations superviseur</p>
+        </div>
+
+        <div class="ligne-progression"></div>
+
+        <div class="etape" data-step="documents">
+            <div class="icone-etape">
+                <img src="images/icone-documents.svg" alt="">
+                <span class="coche-etape">✓</span>
+            </div>
+            <p>Documents à fournir</p>
+        </div>
+    </div>
+
+    <main class="contenu-principal">
+
+        <aside class="illustration">
+            <img src="images/illustration-academique.png" alt="Illustration académique">
+            <h2>Dernière étape !</h2>
+            <p>Déposez les documents nécessaires pour finaliser la soumission de votre mémoire corrigé.</p>
+        </aside>
+
+        <section class="contact">
+
+            <div class="option">
+                <h2>DOCUMENTS À FOURNIR</h2>
+            </div>
+
+            <p class="par">Veuillez joindre les documents nécessaires à la soumission de votre mémoire corrigé.</p>
+
+            <form class="formulaire documents-formulaire" action="traitement.php" method="post" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label for="pv_soutenance">PV de soutenance</label>
+                    <p class="file-info">Taille maximale : 2 Mo · Format PDF</p>
+                    <input type="file" id="pv_soutenance" name="pv_soutenance" accept=".pdf,application/pdf">
+                </div>
+
+                <div class="form-group">
+                    <label for="attestation">Attestation d'inscription de l'année de soutenance<span>*</span></label>
+                    <p class="file-info">Taille maximale : 2 Mo · Format PDF</p>
+                    <input type="file" id="attestation" name="attestation" accept=".pdf,application/pdf" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="preuve_plagiat">Preuve de plagiat du mémoire / Fiche de certification<span>*</span></label>
+                    <p class="file-info">Taille maximale : 2 Mo · Format PDF</p>
+                    <input type="file" id="preuve_plagiat" name="preuve_plagiat" accept=".pdf,application/pdf" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="memoire_corrige">Mémoire corrigé<span>*</span></label>
+                    <p class="file-info">Taille maximale : 50 Mo · Format PDF</p>
+                    <input type="file" id="memoire_corrige" name="memoire_corrige" accept=".pdf,application/pdf" required>
+                </div>
+
+                <div class="boutonsLigne">
+
+                    <a class="precedentButton" href="superviseur.html">
+                        Précédent
+                        <div class="iconeButton">
+                            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                    </a>
+
+                    <button type="submit" class="suivantButton">
+                        Soumettre mon dossier
+                    </button>
+
+                </div>
+
+            </form>
+        </section>
+    </main>
+
+    <footer class="pied-page">
+        <p>© 2026 - Plateforme de soumission des mémoires universitaires</p>
+        <p>Tous droits réservés.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

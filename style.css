@@ -1,0 +1,1141 @@
+@import url('https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+:root {
+    --bleu-principal: #1A73E8;
+}
+body {
+font-family: Arial, Helvetica, sans-serif;
+background-color: #f0f4fc;
+min-height: 100vh;
+display: flex;
+justify-content: flex-start;
+align-items: center;
+padding: 30px 20px;
+color: #102b50;
+flex-direction: column;
+}
+.contact {
+width: 100%;
+max-width: 1400px;
+background-color: #ffffff;
+padding: 25px 40px 35px;
+border-radius: 25px;
+box-shadow: 0 5px 25px rgba(0, 30, 70, 0.10);
+border: 1px solid #e0e7f0;
+}
+.option {
+    text-align: left;
+    margin-bottom: 25px;
+    padding: 20px 30px;
+    background-color: #e1f3e8;
+    border-radius: 25px;
+    border: none;
+}
+.option h2 {
+    color: var(--bleu-principal);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    justify-content: center;
+    text-align: center;
+}
+    .par {
+    justify-content: center;
+    text-align: center;
+    
+    }
+
+ .formulaire {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 30px;
+    row-gap: 5px;
+}
+
+.formulaire .boutonsLigne {
+    grid-column: 1 / -1;
+}
+
+.champ {
+    margin-bottom: 20px;
+    width: 100%;
+}
+.champ label {
+    display: inline-block;
+    margin-bottom: 9px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #102b50;
+}
+.champ label span {
+    color: #e63946;
+    margin-left: 4px;
+}
+.champ input,
+.champ select {
+    width:100%;
+    height:60px;
+    padding: 0 20px;
+    border: 1px solid #cbd3df;
+    border-radius: 17px;
+    outline: none;
+    background-color: #f7f8fb;
+    color: #102b50;
+    font-size: 17px;
+    transition: 0.3s ease;
+}
+.champ input::placeholder{
+    color: #8490a3;
+}
+.champ input::focus,
+.champ select::focus {
+    border-color: #087b50;
+    box-shadow: 0 0 0 3px rgba(8, 123, 80, 0.12);
+    background-color: #ffffff;
+}
+.champ select{
+    cursor: pointer;
+}
+.champ select option {
+    color:#102b50;
+}
+.champ input[type="date"] {
+    cursor: pointer;
+}
+.champ input[type="tel"] {
+    width: calc(100% - 65px);
+}
+.champ > span {
+    color: 102b50;
+    font-size: 16px;
+    font-weight: 700;
+    margin-right: 5px;
+}
+.suivantButton {
+  background: #1A73E8;
+  color: white;
+  font-family: inherit;
+  padding: 0.45em;
+  padding-left: 1em;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 0.9em;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 1.6em -0.6em #714da6;
+  overflow: hidden;
+  position: relative;
+  height: 2.8em;
+  padding-right: 3em;
+  margin-left: auto;
+}
+
+.iconButton {
+  margin-left: 1em;
+  position: absolute;
+  display: flex;
+  align-items: center ;
+  justify-content: center;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 0.7em;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em #7a8cf3;
+  right: 0.3em;
+  transition: all 0.3s;
+}
+
+.suivantButton:hover {
+  transform: translate(-0.05em, -0.05em);
+  box-shadow: 0.15em 0.15em #5566c2;
+}
+
+.suivantButton:active {
+  transform: translate(0.05em, 0.05em);
+  box-shadow: 0.05em 0.05em #5566c2;
+}
+
+.precedentButton {
+  background: #1A73E8;
+  color: white;
+  font-family: inherit;
+  padding: 0.45em;
+  padding-left: 3em;
+  padding-right: 1em;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 0.9em;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 1.6em -0.6em #714da6;
+  overflow: hidden;
+  position: relative;
+  height: 2.8em;
+}
+
+.precedentButton:hover {
+  transform: translate(-0.05em, -0.05em);
+  box-shadow: 0.15em 0.15em #5566c2;
+}
+
+.precedentButton:active {
+  transform: translate(0.05em, 0.05em);
+  box-shadow: 0.05em 0.05em #5566c2;
+}
+.iconeButton {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 0.7em;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em #7a8cf3;
+  left: 0.3em;
+  transition: all 0.3s;
+}
+.iconeButton svg {
+  transform: scaleX(-1); 
+}
+.boutonsLigne {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.precedentButton {
+  text-decoration: none;
+}
+.par {
+  margin-bottom: 25px;
+}
+.entete {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    min-height: 110px;
+    background-color: #1A73E8;
+    padding: 20px 30px;
+    border-radius: 18px;
+    margin-bottom: 30px;
+}
+
+.logo img {
+    width: 30%;
+    height: auto;
+    object-fit: contain;
+    
+}
+
+
+.titre-entete {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 70%;
+}
+
+.titre-entete h1 {
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.titre-entete p {
+    color: #ffffff;
+    font-size: 15px;
+}
+.progression {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+    margin: 30px auto 40px;
+}
+
+.etape {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+}
+
+.icone-etape {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #cbd3df;
+    border-radius: 50%;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.icone-etape img {
+    width: 30px;
+    height: 30px;
+    opacity: 0.5;
+}
+
+.etape p {
+    font-size: 14px;
+    font-weight: 600;
+    color: #8490a3;
+}
+
+.etape.active .icone-etape {
+    background-color: #e1f3e8;
+    border-color: #087B50;
+}
+
+.etape.active .icone-etape img {
+    opacity: 1;
+}
+
+.etape.active p {
+    color: #087B50;
+}
+
+.ligne-progression {
+    flex: 1;
+    height: 4px;
+    background-color: #dce3ec;
+    margin: 27px 8px 0;
+    border-radius: 10px;
+}
+.contenu-principal {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 35px;
+    width: 100%;
+    max-width: 1400px;
+    align-items: stretch;
+}
+
+.illustration {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 25px;
+    padding: 30px;
+}
+
+.illustration img {
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 25px;
+}
+
+.illustration h2 {
+    color: #1A73E8;
+    font-size: 25px;
+    margin-bottom: 15px;
+    font-family: "Poppins", sans-serif;
+}
+
+.illustration p {
+    color: #102b50;
+    font-size: 16px;
+    line-height: 1.7;
+    font-family: "Poppins", sans-serif;
+}
+
+.contenu-principal .contact {
+    width: 100%;
+    max-width: none;
+}
+
+@media (max-width: 800px) {
+    .contenu-principal {
+        grid-template-columns: 1fr;
+    }
+}
+.pied-page {
+    width: 100%;
+    max-width: 1400px;
+    margin: 35px auto 0;
+    padding: 20px;
+    text-align: center;
+    background-color: #D6E3F2;
+    border-top: 2px solid #1A73E8;
+    border-radius: 12px;
+}
+
+.pied-page p {
+    color: #8490a3;
+    font-size: 14px;
+    line-height: 1.8;
+}
+.formulaire .suivantButton {
+    grid-column: 1 / -1;
+    justify-self: end;
+    margin-left: 0;
+}
+.formulaire {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 30px;
+    row-gap: 5px;
+}
+.formulaire .boutonsLigne {
+    grid-column: 1 / -1;
+}
+.formulaire .suivantButton {
+    grid-column: 1 / -1;
+    justify-self: end;
+    margin-left: 0;
+}
+.champ input:focus,
+.champ select:focus {
+    border-color: #087B50;
+    box-shadow: 0 0 0 3px rgba(8, 123, 80, 0.12);
+    background-color: #ffffff;
+}
+.telephone-groupe {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.telephone-groupe .indicatif {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 75px;
+    height: 60px;
+    padding: 0 12px;
+    background-color: #e1f3e8;
+    color: #087B50;
+    font-size: 17px;
+    font-weight: 700;
+    border: 1px solid #cbd3df;
+    border-radius: 17px;
+    box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.30);
+}
+
+.telephone-groupe input {
+    flex: 1;
+    min-width: 0;
+    width: auto;
+}
+
+@media (max-width: 700px) {
+    .telephone-groupe .indicatif {
+        height: 52px;
+        min-width: 65px;
+        font-size: 15px;
+    }
+}
+.documents-formulaire {
+    row-gap: 25px;
+}
+
+.documents-formulaire .form-group {
+    background-color: #ffffff;
+    border: 1px solid #dce5f0;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(16, 43, 80, 0.05);
+    transition: 0.3s ease;
+}
+
+.documents-formulaire .form-group:hover {
+    border-color: #1A73E8;
+    box-shadow: 0 6px 16px rgba(26, 115, 232, 0.09);
+}
+
+.documents-formulaire .form-group label {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #102b50;
+    line-height: 1.5;
+}
+
+.documents-formulaire .form-group label span {
+    color: #e63946;
+    margin-left: 4px;
+}
+
+.documents-formulaire .file-info {
+    font-size: 11px;
+    color: #8290a3;
+    margin-bottom: 13px;
+    line-height: 1.4;
+}
+
+.documents-formulaire input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #f7f9fc;
+    border: 1px dashed #cbd7e6;
+    border-radius: 10px;
+    color: #64748b;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.documents-formulaire input[type="file"]::file-selector-button {
+    background-color: #e1f3e8;
+    color: #087B50;
+    border: 1px solid #c3e5d1;
+    border-radius: 8px;
+    padding: 9px 14px;
+    margin-right: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.documents-formulaire input[type="file"]::file-selector-button:hover {
+    background-color: #ccebd9;
+}
+
+.documents-formulaire .boutonsLigne {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+@media (max-width: 700px) {
+    .documents-formulaire .form-group {
+        padding: 15px;
+    }
+
+    .documents-formulaire .form-group label {
+        font-size: 14px;
+    }
+
+    .documents-formulaire .file-info {
+        font-size: 10px;
+    }
+
+    .documents-formulaire input[type="file"] {
+        font-size: 11px;
+    }
+
+    .documents-formulaire input[type="file"]::file-selector-button {
+        font-size: 11px;
+        padding: 8px 10px;
+    }
+
+    .documents-formulaire .boutonsLigne {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .documents-formulaire .boutonsLigne a,
+    .documents-formulaire .boutonsLigne button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+.documents-formulaire .suivantButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: 0;
+}
+[hidden] {
+    display: none !important;
+}
+
+.icone-etape {
+    position: relative;
+}
+
+.coche-etape {
+    display: none;
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    width: 22px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+    background-color: #087B50;
+    color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.etape.terminee .coche-etape {
+    display: flex;
+}
+
+.etape.terminee .icone-etape {
+    border-color: #087B50;
+}
+
+.ligne-progression.terminee {
+    background-color: #087B50;
+}
+
+.badge-confirmation {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(16, 43, 80, 0.45);
+}
+
+.confirmation-contenu {
+    width: 100%;
+    max-width: 430px;
+    padding: 35px 25px;
+    text-align: center;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+    animation: apparitionBadge 0.35s ease;
+}
+
+.confirmation-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 18px;
+    color: #ffffff;
+    background: #087B50;
+    border-radius: 50%;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.confirmation-contenu h2 {
+    margin-bottom: 12px;
+    color: #102b50;
+    font-size: 21px;
+}
+
+.confirmation-contenu p {
+    margin-bottom: 18px;
+    color: #555555;
+    font-size: 15px;
+}
+
+.confirmation-contenu span {
+    display: inline-block;
+    padding: 8px 16px;
+    color: #087B50;
+    background: #e1f3e8;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+@keyframes apparitionBadge {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.documents-formulaire button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.ligne-fichier {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.ligne-fichier input[type="file"] {
+    flex: 1;
+    min-width: 0;
+}
+
+.voir-fichier {
+    color: #1A73E8;
+    font-weight: 600;
+    text-decoration: underline;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.voir-fichier[hidden] {
+    display: none;
+}
+.date-naissance {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1.2fr;
+    gap: 10px;
+    width: 100%;
+}
+
+.date-naissance select {
+    width: 100%;
+    min-width: 0;
+}
+.date-naissance select {
+    width: 100%;
+    min-width: 0;
+    text-align: center;
+    text-align-last: center;
+    font-size: 14px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+/* ===== Erreurs de soumission ===== */
+.etape.erreur .icone-etape {
+    border-color: #d93025;
+    background-color: #fdecea;
+}
+
+.etape.erreur .coche-etape {
+    display: flex;
+    background-color: #d93025;
+}
+
+.etape.erreur p {
+    color: #d93025;
+}
+
+.etape.cliquable {
+    cursor: pointer;
+}
+
+.etape.cliquable .icone-etape {
+    transition: transform 0.2s ease;
+}
+
+.etape.cliquable:hover .icone-etape {
+    transform: scale(1.08);
+}
+
+.etape.cliquable:focus-visible {
+    outline: 3px solid #1A73E8;
+    outline-offset: 6px;
+    border-radius: 12px;
+}
+
+.champ input.champ-erreur,
+.champ select.champ-erreur,
+.documents-formulaire input.champ-erreur {
+    border-color: #d93025 !important;
+    background-color: #fdecea !important;
+}
+
+.message-erreur {
+    margin-top: 8px;
+    color: #d93025;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.message-erreur-general {
+    grid-column: 1 / -1;
+    margin-bottom: 15px;
+    padding: 14px 18px;
+    border: 1px solid #d93025;
+    border-radius: 12px;
+    background-color: #fdecea;
+    color: #b3261e;
+    font-weight: 600;
+}
+
+input,
+select,
+textarea {
+    box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.30);
+    border: none;
+    border-radius: 10px;
+    background-color: aliceblue;
+    box-sizing: border-box;
+}
+input:focus,
+select:focus,
+textarea:focus {
+    box-shadow: 3px 4px 9px rgba(26, 115, 232, 0.40);
+    outline: 1px solid #1A73E8;
+}
+
+/* ==========================================================================
+   RESPONSIVE MOBILE & TABLETTE — FORMULAIRES (personnel, academique, superviseur, document)
+   ========================================================================== */
+@media (max-width: 900px) {
+    body {
+        padding: 18px 14px;
+    }
+
+    .entete {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: 10px;
+        min-height: auto;
+        padding: 16px 18px;
+        margin-bottom: 22px;
+    }
+
+    .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logo img {
+        width: 64px;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .titre-entete {
+        position: static;
+        transform: none;
+        left: auto;
+        width: 100%;
+    }
+
+    .titre-entete h1 {
+        font-size: 20px;
+        line-height: 1.25;
+        margin-bottom: 5px;
+    }
+
+    .titre-entete p {
+        font-size: 13.5px;
+    }
+
+    .progression {
+        margin: 18px auto 26px;
+        gap: 4px;
+    }
+
+    .ligne-progression {
+        margin: 22px 2px 0;
+        height: 3px;
+    }
+
+    .icone-etape {
+        width: 44px;
+        height: 44px;
+        margin-bottom: 7px;
+    }
+
+    .icone-etape img {
+        width: 22px;
+        height: 22px;
+    }
+
+    .etape p {
+        font-size: 11.5px;
+        line-height: 1.25;
+    }
+
+    .illustration {
+        padding: 10px 15px 5px;
+    }
+
+    .illustration img {
+        max-width: 230px;
+        margin-bottom: 14px;
+    }
+
+    .illustration h2 {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    .illustration p {
+        font-size: 14px;
+        line-height: 1.55;
+    }
+}
+
+@media (max-width: 700px) {
+    body {
+        padding: 12px 10px;
+        overflow-x: hidden;
+    }
+
+    .entete {
+        padding: 14px 12px;
+        border-radius: 14px;
+        margin-bottom: 18px;
+    }
+
+    .logo img {
+        width: 54px;
+    }
+
+    .titre-entete h1 {
+        font-size: 17px;
+    }
+
+    .titre-entete p {
+        font-size: 12.5px;
+    }
+
+    /* Barre de progression compacte sur 4 colonnes équilibrées */
+    .progression {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        align-items: start;
+        margin: 14px auto 22px;
+    }
+
+    .ligne-progression {
+        display: none;
+    }
+
+    .icone-etape {
+        width: 42px;
+        height: 42px;
+        margin-bottom: 6px;
+    }
+
+    .icone-etape img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .coche-etape {
+        width: 18px;
+        height: 18px;
+        font-size: 11px;
+        top: -4px;
+        right: -5px;
+    }
+
+    .etape p {
+        font-size: 11px;
+        line-height: 1.2;
+        word-break: break-word;
+    }
+
+    .illustration img {
+        max-width: 185px;
+        margin-bottom: 10px;
+    }
+
+    .illustration h2 {
+        font-size: 18px;
+    }
+
+    .illustration p {
+        font-size: 13px;
+    }
+
+    /* Carte formulaire */
+    .contact {
+        padding: 18px 16px 24px;
+        border-radius: 18px;
+    }
+
+    .option {
+        padding: 14px 14px;
+        border-radius: 16px;
+        margin-bottom: 20px;
+    }
+
+    .option h2 {
+        font-size: 19px;
+        line-height: 1.25;
+    }
+
+    .par {
+        font-size: 13.5px;
+        margin-bottom: 18px;
+    }
+
+    /* Passage du formulaire en 1 seule colonne pleine largeur sur téléphone */
+    .formulaire {
+        grid-template-columns: 1fr;
+        column-gap: 0;
+        row-gap: 2px;
+    }
+
+    .champ {
+        margin-bottom: 16px;
+    }
+
+    .champ label {
+        font-size: 15px;
+        margin-bottom: 7px;
+    }
+
+    .champ input,
+    .champ select {
+        height: 50px;
+        padding: 0 15px;
+        border-radius: 13px;
+        font-size: 15px;
+    }
+
+    /* Date de naissance : Jour / Mois / Année bien lisibles sans troncature */
+    .date-naissance {
+        grid-template-columns: 0.85fr 1.35fr 1fr;
+        gap: 8px;
+    }
+
+    .date-naissance select {
+        height: 50px;
+        padding: 0 4px;
+        font-size: 14px;
+    }
+
+    /* Téléphone : indicatif (+229) + numéro pleine largeur */
+    .telephone-groupe {
+        gap: 8px;
+    }
+
+    .telephone-groupe .indicatif {
+        height: 50px;
+        min-width: 66px;
+        padding: 0 10px;
+        border-radius: 13px;
+        font-size: 15px;
+    }
+
+    /* Boutons Précédent / Suivant adaptés au tactile */
+    .boutonsLigne {
+        flex-direction: column-reverse;
+        align-items: stretch;
+        gap: 12px;
+        margin-top: 8px;
+    }
+
+    .suivantButton,
+    .precedentButton {
+        width: 100%;
+        justify-content: center;
+        height: 48px;
+        font-size: 15px;
+    }
+
+    .formulaire .suivantButton {
+        justify-self: stretch;
+        width: 100%;
+    }
+
+    .pied-page {
+        margin-top: 24px;
+        padding: 15px 12px;
+        border-radius: 10px;
+    }
+
+    .pied-page p {
+        font-size: 12.5px;
+    }
+}
+
+@media (max-width: 380px) {
+    .date-naissance {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .etape p {
+        font-size: 10px;
+    }
+}
+
+
+/* ==========================================================================
+   BOUTON RETOUR À L'ACCUEIL (pages personnel, academique, superviseur, document)
+   ========================================================================== */
+.barre-retour-accueil {
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: -12px auto 14px;
+}
+
+.bouton-retour-accueil {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 18px;
+    background-color: #ffffff;
+    color: #102b50;
+    border: 1.5px solid #c7d5ea;
+    border-radius: 12px;
+    font-size: 14.5px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 3px 10px rgba(16, 43, 80, 0.06);
+    transition: all 0.2s ease;
+}
+
+.bouton-retour-accueil .fleche-retour {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-weight: 800;
+    color: #1A73E8;
+    transition: transform 0.2s ease;
+}
+
+.bouton-retour-accueil:hover {
+    background-color: #eaf2fe;
+    border-color: #1A73E8;
+    color: #1A73E8;
+    box-shadow: 0 5px 14px rgba(26, 115, 232, 0.14);
+}
+
+.bouton-retour-accueil:hover .fleche-retour {
+    transform: translateX(-3px);
+}
+
+@media (max-width: 700px) {
+    .barre-retour-accueil {
+        margin: -6px auto 12px;
+    }
+
+    .bouton-retour-accueil {
+        padding: 8px 14px;
+        font-size: 13.5px;
+        border-radius: 10px;
+    }
+}

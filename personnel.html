@@ -1,0 +1,172 @@
+<!-- ==========================================================================
+     FICHIER : personnel.html (Étape 1/4)
+     RÔLE : Saisie des informations personnelles de l'étudiant, puis redirection vers academique.html
+     ========================================================================== -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Depot-Memoire - Informations personnelles</title>
+</head>
+<body data-page="personnel">
+
+    <header class="entete">
+        <div class="logo">
+            <img src="images/icone-header.png" alt="Logo de l'université">
+        </div>
+        <div class="titre-entete">
+            <h1>SOUMISSION DE MÉMOIRE CORRIGÉ</h1>
+            <p>Plateforme de dépôt des mémoires universitaires</p>
+        </div>
+    </header>
+
+    <div class="barre-retour-accueil">
+        <a href="confirmation.html" class="bouton-retour-accueil">
+            <span class="fleche-retour" aria-hidden="true">←</span>
+            <span>Retour à l'accueil</span>
+        </a>
+    </div>
+
+
+    <div class="progression">
+        <div class="etape" data-step="personnel">
+            <div class="icone-etape">
+                <img src="images/icone-personnel.svg" alt="">
+                <span class="coche-etape">✓</span>
+            </div>
+            <p>Informations personnelles</p>
+        </div>
+
+        <div class="ligne-progression"></div>
+
+        <div class="etape" data-step="academique">
+            <div class="icone-etape">
+                <img src="images/icone-diplome.svg" alt="">
+                <span class="coche-etape">✓</span>
+            </div>
+            <p>Informations académiques</p>
+        </div>
+
+        <div class="ligne-progression"></div>
+
+        <div class="etape" data-step="superviseur">
+            <div class="icone-etape">
+                <img src="images/icone-superviseur.svg" alt="">
+                <span class="coche-etape">✓</span>
+            </div>
+            <p>Informations superviseur</p>
+        </div>
+
+        <div class="ligne-progression"></div>
+
+        <div class="etape" data-step="documents">
+            <div class="icone-etape">
+                <img src="images/icone-documents.svg" alt="">
+                <span class="coche-etape">✓</span>
+            </div>
+            <p>Documents à fournir</p>
+        </div>
+    </div>
+
+    <main class="contenu-principal">
+
+        <aside class="illustration">
+            <img src="images/illustration-academique.png" alt="Illustration académique">
+            <h2>Votre mémoire, notre priorité</h2>
+            <p>Soumettez votre mémoire en quelques étapes simples et suivez facilement votre dossier.</p>
+        </aside>
+
+        <section class="contact">
+
+            <div class="option">
+                <h2>INFORMATIONS PERSONNELLES</h2>
+            </div>
+
+            <form class="formulaire" action="academique.html" method="get">
+
+                <div class="champ">
+                    <label for="nom-complet">Nom-complet<span>*</span></label>
+                    <input type="text" id="nom-complet" name="nom-complet" placeholder="AKOGBATO Jean-rene" required>
+                </div>
+
+                
+                    <div class="champ">
+                      <label>Date de naissance <span class="obligatoire">*</span></label>
+
+                        <div class="date-naissance">
+                            <select id="jour" name="jour" required>
+                             <option value="">Jour</option>
+                            </select>
+
+                            <select id="mois" name="mois" required>
+                             <option value="">Mois</option>
+                             <option value="01">Janvier</option>
+                             <option value="02">Février</option>
+                             <option value="03">Mars</option>
+                             <option value="04">Avril</option>
+                             <option value="05">Mai</option>
+                             <option value="06">Juin</option>
+                             <option value="07">Juillet</option>
+                             <option value="08">Août</option>
+                             <option value="09">Septembre</option>
+                             <option value="10">Octobre</option>
+                             <option value="11">Novembre</option>
+                             <option value="12">Décembre</option>
+                            </select>
+
+                            <select id="annee" name="annee" required>
+                               <option value="">Année</option>
+                            </select>
+                    </div>
+</div>
+                  
+
+                <div class="champ">
+                    <label for="civilite">Civilité<span>*</span></label>
+                    <select id="civilite" name="civilite" required>
+                        <option value="">Choisir</option>
+                        <option value="Monsieur (Mr)">Monsieur (Mr)</option>
+                        <option value="Mademoiselle (Mlle)">Mademoiselle (Mlle)</option>
+                        <option value="Madame (Mme)">Madame (Mme)</option>
+                        <option value="Docteur (Dr)">Docteur (Dr)</option>
+                        <option value="Professeur (Prof)">Professeur (Prof)</option>
+                    </select>
+                </div>
+
+                <div class="champ">
+                    <label for="email">Email<span>*</span></label>
+                    <input type="email" id="email" name="email" placeholder="exemple@gmail.com" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Format attendu : exemple@gmail.com" required>
+                </div>
+
+                <div class="champ">
+                    <label for="telephone">Téléphone<span>*</span></label>
+                    <div class="telephone-groupe">
+                        <span class="indicatif">(+229)</span>
+                        <input type="tel" id="telephone" name="telephone" value="01" placeholder="01 46 58 58 96" inputmode="numeric" maxlength="14" autocomplete="tel-national" pattern="01( [0-9]{2}){4}" title="Format attendu : 01 46 58 58 96" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="suivantButton">
+                    Suivant
+                    <div class="iconButton">
+                        <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                </button>
+
+            </form>
+        </section>
+    </main>
+
+    <footer class="pied-page">
+        <p>© 2026 - Plateforme de soumission des mémoires universitaires</p>
+        <p>Tous droits réservés.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1108 @@
+/* SUPPRIME LE BLANC AUTOUR DE LA PAGE */
+/* SUPPRIME LE BLANC AUTOUR DE LA PAGE + FOOTER TOUJOURS EN BAS */
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#footer-container {
+    margin-top: auto;
+}
+
+/* EN-TÊTE GÉNÉRAL */
+.entete-site {
+    --hauteur-bande: 60px;     /* hauteur du bleu = hauteur du blanc (jusqu'au trait sous Accueil) */
+    --hauteur-nav: 36px;       /* hauteur de la ligne Accueil / Connexion */
+    --largeur-texte: 240px;    /* largeur du texte ministère = longueur du drapeau */
+    --taille-logo: 116px;      /* boîte du logo */
+    --centre-logo: 50px;       /* milieu du bloc Ministère -> République, depuis le haut */
+    --espace-logo: 100px;      /* espace réservé au logo avant le texte */
+    --marge-cote: calc(3% + 8px);
+
+    width: 100%;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+/* CONTACT / COTONOU : à droite, dans la bande bleue */
+.bande-superieure {
+    position: absolute;
+    top: 0;
+    right: var(--marge-cote);
+    height: var(--hauteur-bande);
+    background: transparent;
+    color: white;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    z-index: 5;
+}
+
+.contenu-superieur {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    font-size: 14px;
+}
+
+/* TITRE DE LA PLATEFORME : dans la bande bleue, centré */
+.titre-plateforme {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--hauteur-bande);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    padding: 0;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.titre-plateforme h2 {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* EN-TÊTE PRINCIPAL : bleu = 60px, blanc = 24px (+ 36px de navigation = 60px) */
+.entete-principale {
+    display: flex;
+    position: relative;
+    height: calc(var(--hauteur-bande) * 2 - var(--hauteur-nav));
+    min-height: calc(var(--hauteur-bande) * 2 - var(--hauteur-nav));
+    padding: 0 var(--marge-cote) 0 calc(var(--marge-cote) + var(--espace-logo));
+    box-sizing: border-box;
+
+    background: linear-gradient(
+        to bottom,
+        #1A73E8 0,
+        #1A73E8 var(--hauteur-bande),
+        #ffffff var(--hauteur-bande),
+        #ffffff 100%
+    );
+}
+
+/* BLASON : centré sur le bloc Ministère -> République du Bénin */
+.blason-conteneur {
+    position: absolute;
+    left: calc(var(--marge-cote) - 9px);
+    top: calc(var(--centre-logo) - var(--taille-logo) / 2);
+    width: var(--taille-logo);
+    height: var(--taille-logo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    pointer-events: none;   /* ne bloque pas le clic sur Accueil */
+}
+
+.blason-conteneur img {
+    width: var(--taille-logo);
+    height: var(--taille-logo);
+    object-fit: contain;
+}
+
+/* IDENTITÉ INSTITUTIONNELLE */
+.identite-institutionnelle {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* PARTIE BLEUE : ministère collé en bas du bleu */
+.zone-bleue {
+    flex: none;
+    height: var(--hauteur-bande);
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 0 0 5px;
+    box-sizing: border-box;
+}
+
+.zone-bleue h1 {
+    color: white;
+    font-size: 9px;
+    line-height: 1.3;
+    margin: 0;
+    font-weight: 700;
+    width: var(--largeur-texte);
+    max-width: 100%;
+    text-align: justify;
+}
+
+/* DRAPEAU : même longueur que le texte, centré sur la limite bleu / blanc */
+.drapeau-benin {
+    position: absolute;
+    top: var(--hauteur-bande);
+    left: 0;
+    transform: translateY(-50%);
+    width: var(--largeur-texte);
+    max-width: 100%;
+    height: 6px;
+    display: flex;
+    flex-direction: row;
+    z-index: 3;
+}
+
+.drapeau-vert {
+    flex: 1;
+    background-color: #008751;
+}
+
+.drapeau-partie-droite {
+    display: contents;
+}
+
+.drapeau-jaune {
+    flex: 1;
+    background-color: #FCD116;
+}
+
+.drapeau-rouge {
+    flex: 1;
+    background-color: #E8112D;
+}
+
+/* PARTIE BLANCHE : République du Bénin sous le drapeau */
+.zone-blanche {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 7px 0 0;
+    box-sizing: border-box;
+}
+
+.zone-blanche h2 {
+    color: #102b50;
+    font-size: 12px;
+    line-height: 1.1;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+/* devise masquée pour garder le blanc compact */
+.zone-blanche p {
+    display: none;
+}
+
+/* NAVIGATION : le trait en bas marque la fin du blanc */
+.navigation-site {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    height: var(--hauteur-nav);
+    padding: 0 16px 0 var(--marge-cote);
+    box-sizing: border-box;
+    background-color: white;
+    border-bottom: 1px solid #e5eaf2;
+}
+
+.navigation-site a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* ICÔNES (dessinées en CSS, rien à changer dans le HTML) */
+.lien-accueil::before,
+.bouton-connexion::before,
+.bouton-depot::before {
+    content: "";
+    display: inline-block;
+    flex: none;
+    width: 16px;
+    height: 16px;
+    background-color: currentColor;
+    -webkit-mask: var(--icone) center / contain no-repeat;
+    mask: var(--icone) center / contain no-repeat;
+}
+
+/* ACCUEIL : bleu, cliquable, centré sous le logo */
+.lien-accueil {
+    --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3Cpolyline points='9 22 9 12 15 12 15 22'/%3E%3C/svg%3E");
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: var(--taille-logo);
+    height: 100%;
+    margin-left: -9px;          /* même bord gauche que la boîte du logo */
+    box-sizing: border-box;
+    color: #1A73E8;
+    border-bottom: 3px solid #1A73E8;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.lien-accueil:hover {
+    background-color: #eaf2fe;
+}
+
+.lien-accueil,
+.lien-accueil:focus,
+.lien-accueil:focus-visible,
+.lien-accueil:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.actions-navigation {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* CONNEXION : dans un cadre, avec icône */
+.bouton-connexion {
+    --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4'/%3E%3Cpolyline points='10 17 15 12 10 7'/%3E%3Cline x1='15' y1='12' x2='3' y2='12'/%3E%3C/svg%3E");
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #102b50;
+    background-color: #ffffff;
+    border: 1px solid #c9d3e3;
+    border-radius: 6px;
+    padding: 6px 12px;
+    transition: background-color 0.2s;
+}
+
+.bouton-connexion:hover {
+    background-color: #f3f7fd;
+}
+
+/* DÉPOSER MON TRAVAIL : icône à côté du texte */
+.bouton-depot {
+    --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='17 8 12 3 7 8'/%3E%3Cline x1='12' y1='3' x2='12' y2='15'/%3E%3C/svg%3E");
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    background-color: #1A73E8;
+    color: white;
+    padding: 7px 14px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* VERSION MOBILE */
+@media (max-width: 700px) {
+
+    .entete-site {
+        --hauteur-bande: 54px;
+        --hauteur-nav: 40px;
+        --taille-logo: 76px;
+        --centre-logo: 40px;
+        --espace-logo: 62px;
+        --marge-cote: 14px;
+    }
+
+    /* sur mobile, le contact reprend sa propre bande au-dessus */
+    .bande-superieure {
+        position: static;
+        height: 24px;
+        background-color: #1A73E8;
+        padding: 0 var(--marge-cote);
+        justify-content: flex-end;
+    }
+
+    .contenu-superieur {
+        font-size: 11px;
+        gap: 12px;
+    }
+
+    /* sur mobile, le titre reste sous la navigation */
+    .titre-plateforme {
+        position: static;
+        height: auto;
+        background-color: white;
+        padding: 6px 3%;
+        pointer-events: auto;
+    }
+
+    .titre-plateforme h2 {
+        color: #1A73E8;
+        font-size: 16px;
+    }
+
+    .zone-bleue {
+        padding-bottom: 4px;
+    }
+
+    .zone-bleue h1 {
+        font-size: 8px;
+        line-height: 1.2;
+        width: 100%;
+    }
+
+    .drapeau-benin {
+        width: 100%;
+        height: 4px;
+    }
+
+    .zone-blanche {
+        padding: 5px 0 0;
+    }
+
+    .zone-blanche h2 {
+        font-size: 11px;
+    }
+
+    .navigation-site {
+        gap: 8px;
+        padding: 0 12px 0 var(--marge-cote);
+    }
+
+    .navigation-site a {
+        font-size: 12px;
+    }
+
+    .actions-navigation {
+        gap: 8px;
+    }
+
+    .bouton-connexion {
+        padding: 5px 8px;
+    }
+
+    .bouton-depot {
+        padding: 6px 8px;
+        font-size: 11px;
+        gap: 5px;
+    }
+}
+
+
+/* ===== PIED DE PAGE ===== */
+.pied-site {
+    --largeur-texte-pied: 300px;   /* même valeur que --largeur-texte de l'en-tête */
+
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+    background: linear-gradient(180deg, #1d2d52 0%, #15213f 100%);
+}
+
+.pied-contenu {
+    display: grid;
+    grid-template-columns: 1.7fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding: 40px calc(3% + 8px) 32px;
+}
+
+/* BLOC INSTITUTION : identique à l'en-tête */
+.pied-institution {
+    display: flex;
+    align-items: center;
+}
+
+.pied-blason {
+    flex: none;
+    width: 116px;
+    height: 116px;
+    object-fit: contain;
+    margin: -28px -8px -28px -27px;   /* le dessin visible fait la hauteur du bloc de texte */
+}
+
+.pied-institution-texte {
+    flex: none;
+    width: var(--largeur-texte-pied);
+    max-width: 100%;
+}
+
+.pied-ministere {
+    margin: 0 0 5px;
+    font-size: 9px;
+    line-height: 1.3;
+    font-weight: 700;
+    text-align: justify;
+    color: #ffffff;
+}
+
+.pied-drapeau {
+    display: flex;
+    width: 100%;
+    height: 6px;
+}
+
+.pied-vert  { flex: 1; background: #008751; }
+.pied-jaune { flex: 1; background: #FCD116; }
+.pied-rouge { flex: 1; background: #E8112D; }
+
+.pied-republique {
+    margin: 5px 0 0;
+    font-size: 12px;
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+/* TEXTES À GAUCHE */
+.pied-description {
+    margin: 22px 0 14px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #c9d6ee;
+    max-width: 320px;
+}
+
+.pied-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+    font-size: 14px;
+    color: #dbe5f7;
+}
+
+.pied-lieu::before,
+.pied-mail::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    flex: none;
+    background-color: #9fbdf0;
+    -webkit-mask: var(--icone) center / contain no-repeat;
+    mask: var(--icone) center / contain no-repeat;
+}
+
+.pied-lieu {
+    --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E");
+}
+
+.pied-mail {
+    --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='4' width='20' height='16' rx='2'/%3E%3Cpolyline points='22 6 12 13 2 6'/%3E%3C/svg%3E");
+}
+
+/* COLONNES */
+.pied-colonne h3 {
+    margin: 0 0 18px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.pied-colonne ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pied-colonne li {
+    margin-bottom: 14px;
+}
+
+.pied-colonne a {
+    color: #dbe5f7;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.pied-colonne a:hover {
+    color: #ffffff;
+}
+
+/* flèches : seulement Liens utiles */
+.pied-colonne ul:not(.pied-reseaux):not(.pied-universites):not(.pied-menu) a::before {
+    content: "→";
+    margin-right: 8px;
+    color: #8fb5f5;
+}
+
+/* MENU : mêmes icônes que l'en-tête */
+.pied-menu a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pied-menu a::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    flex: none;
+    background-color: #8fb5f5;
+    -webkit-mask: var(--icone) center / contain no-repeat;
+    mask: var(--icone) center / contain no-repeat;
+}
+
+.pied-menu-accueil {
+    --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3Cpolyline points='9 22 9 12 15 12 15 22'/%3E%3C/svg%3E");
+}
+
+.pied-menu-depot {
+    --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='17 8 12 3 7 8'/%3E%3Cline x1='12' y1='3' x2='12' y2='15'/%3E%3C/svg%3E");
+}
+
+.pied-menu-connexion {
+    --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4'/%3E%3Cpolyline points='10 17 15 12 10 7'/%3E%3Cline x1='15' y1='12' x2='3' y2='12'/%3E%3C/svg%3E");
+}
+
+/* UNIVERSITÉS : logo à la place de la flèche */
+.pied-universites a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pied-logo-univ {
+    width: 26px;
+    height: 26px;
+    flex: none;
+    object-fit: contain;
+    background: #ffffff;
+    border-radius: 50%;
+    padding: 2px;
+    box-sizing: border-box;
+}
+
+/* RÉSEAUX */
+.pied-titre-reseaux {
+    margin-top: 28px !important;
+}
+
+.pied-reseaux a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pied-ico {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.pied-ico-yt {
+    width: 18px;
+    height: 13px;
+    border-radius: 4px;
+    background: #ffffff;
+    color: #15213f;
+    font-size: 8px;
+}
+
+/* BARRE DU BAS */
+.pied-bas {
+    background-color: #1A73E8;
+    text-align: center;
+    padding: 12px 5%;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+    .pied-contenu {
+        grid-template-columns: 1fr 1fr;
+    }
+    .pied-identite {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 600px) {
+    .pied-contenu {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 28px 16px;
+    }
+    .pied-blason {
+        width: 96px;
+        height: 96px;
+        margin: -18px -6px -18px -22px;
+    }
+    .pied-institution-texte {
+        flex: 1;
+        width: auto;
+    }
+}
+
+/* ===== BARRE DE RECHERCHE : au milieu de la bande blanche ===== */
+.navigation-site {
+    position: relative;
+}
+
+.barre-recherche {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(340px, 28%);
+    height: 28px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 10px 0 14px;
+    background: #ffffff;
+    border: 2px solid #444444;
+    border-radius: 999px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.barre-recherche:focus-within {
+    border-color: #1A73E8;
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+}
+
+.barre-recherche input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    font: 13px Arial, sans-serif;
+    color: #102b50;
+}
+
+.barre-recherche input::placeholder {
+    color: #444444;
+    opacity: 1;
+}
+
+.barre-recherche input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+/* bouton loupe à droite : clairement identifiable comme bouton à cliquer */
+.barre-recherche {
+    padding: 0 3px 0 14px;
+    height: 32px;
+}
+
+.barre-recherche button {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    background-color: #1A73E8;
+    color: #ffffff;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(26, 115, 232, 0.35);
+    transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.barre-recherche button:hover {
+    background-color: #1258b8;
+    transform: scale(1.05);
+    box-shadow: 0 3px 9px rgba(26, 115, 232, 0.45);
+}
+
+.barre-recherche button:active {
+    transform: scale(0.96);
+}
+
+/* écrans étroits : la recherche passe sur sa propre ligne */
+@media (max-width: 1150px) {
+    .navigation-site {
+        height: auto;
+        flex-wrap: wrap;
+        row-gap: 6px;
+        padding-top: 4px;
+        padding-bottom: 8px;
+    }
+
+    .lien-accueil {
+        height: 36px;
+    }
+
+    .barre-recherche {
+        position: static;
+        transform: none;
+        order: 3;
+        width: 100%;
+    }
+}
+
+/* EN-TÊTE FIXE : reste en haut quand on défile */
+#header-container {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    flex: none;
+}
+
+/* Bénin : même icône de localisation que le pied de page */
+.entete-lieu {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.entete-lieu::before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    flex: none;
+    background-color: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+
+/* ==========================================================================
+   ONGLETS DE GAUCHE (ACCUEIL & MÉMOIRES DÉPOSÉS) AVEC INDICATEUR ACTIF
+   ========================================================================== */
+.liens-gauche-nav {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 6px;
+    margin-left: -9px;
+}
+
+.lien-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 100%;
+    padding: 0 14px;
+    box-sizing: border-box;
+    color: #102b50;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+.lien-nav::before {
+    content: "";
+    display: inline-block;
+    flex: none;
+    width: 16px;
+    height: 16px;
+    background-color: currentColor;
+    -webkit-mask: var(--icone) center / contain no-repeat;
+    mask: var(--icone) center / contain no-repeat;
+}
+
+/* Icône maison pour Accueil */
+.lien-accueil {
+    --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3Cpolyline points='9 22 9 12 15 12 15 22'/%3E%3C/svg%3E");
+    width: auto;
+    margin-left: 0;
+}
+
+/* Icône document/livre pour Mémoires déposés */
+.lien-memoires {
+    --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 19.5A2.5 2.5 0 0 1 6.5 17H20'/%3E%3Cpath d='M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z'/%3E%3C/svg%3E");
+}
+
+.lien-nav:hover {
+    background-color: #eaf2fe;
+    color: #1A73E8;
+}
+
+/* État actif : texte bleu + barre bleue en bas uniquement sur la page en cours */
+.lien-nav.actif {
+    color: #1A73E8;
+    border-bottom: 3px solid #1A73E8;
+}
+
+@media (max-width: 1150px) {
+    .liens-gauche-nav {
+        height: 36px;
+    }
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   BOUTON MENU HAMBURGER (À DROITE) & MENU POPUP FLOTTANT MOBILE
+   ========================================================================== */
+.bouton-menu-mobile {
+    display: none;
+}
+
+.menu-mobile-deroulant[hidden] {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .entete-site {
+        --hauteur-bande: 52px;
+        --taille-logo: 44px;
+        --centre-logo: 41px;
+        --marge-cote: 8px;
+    }
+
+    .bande-superieure,
+    .navigation-site {
+        display: none !important;
+    }
+
+    .entete-principale {
+        position: relative;
+        height: 82px;
+        min-height: 82px;
+        padding: 0 54px 0 54px; /* Espace pour le logo à gauche et le bouton hamburger à droite */
+        align-items: center;
+        border-bottom: 1px solid #e2eaf5;
+    }
+
+    /* Emblème serré à GAUCHE */
+    .blason-conteneur {
+        left: var(--marge-cote);
+        top: calc(var(--centre-logo) - var(--taille-logo) / 2);
+        width: var(--taille-logo);
+        height: var(--taille-logo);
+    }
+
+    .blason-conteneur img {
+        width: var(--taille-logo);
+        height: var(--taille-logo);
+    }
+
+    /* Textes institutionnels et drapeau serrés et uniformes à GAUCHE */
+    .identite-institutionnelle {
+        max-width: 215px;
+    }
+
+    .zone-bleue {
+        height: var(--hauteur-bande);
+        padding-bottom: 3px;
+    }
+
+    .zone-bleue h1 {
+        font-size: 6.9px;
+        line-height: 1.15;
+        letter-spacing: -0.15px;
+        width: 100%;
+    }
+
+    .drapeau-benin {
+        top: var(--hauteur-bande);
+        width: 100%;
+        height: 3.5px;
+    }
+
+    .zone-blanche {
+        padding: 3px 0 0;
+    }
+
+    .zone-blanche h2 {
+        font-size: 9.5px;
+        letter-spacing: 0.15px;
+    }
+
+    /* Bouton hamburger 3 tirets positionné sur la partie DROITE */
+    .bouton-menu-mobile {
+        position: absolute;
+        top: 50%;
+        right: var(--marge-cote);
+        transform: translateY(-50%);
+        width: 40px;
+        height: 38px;
+        padding: 8px 6px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background: #f0f5ff;
+        border: 1.5px solid #bcd0f0;
+        border-radius: 10px;
+        cursor: pointer;
+        z-index: 20;
+    }
+
+    .bouton-menu-mobile span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: #102b50;
+        border-radius: 3px;
+        transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+
+    .bouton-menu-mobile[aria-expanded="true"] span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+    .bouton-menu-mobile[aria-expanded="true"] span:nth-child(2) {
+        opacity: 0;
+    }
+    .bouton-menu-mobile[aria-expanded="true"] span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+
+    /* Menu déroulant mobile en mode carte popup flottante alignée à DROITE (ne prend pas tout l'écran, en overlay) */
+    .menu-mobile-deroulant {
+        position: absolute;
+        top: 84px;
+        right: 8px;
+        width: 285px;
+        max-width: calc(100vw - 16px);
+        background: #ffffff;
+        border: 1px solid #d0dfef;
+        border-radius: 18px;
+        box-shadow: 0 16px 36px rgba(11, 30, 68, 0.22);
+        padding: 12px;
+        z-index: 1050;
+        animation: apparitionPopup 0.2s ease-out;
+    }
+
+    @keyframes apparitionPopup {
+        from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .menu-mobile-conteneur-interne {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .menu-mobile-lien {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 11px 14px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #102b50;
+        background-color: #f4f8ff;
+        border: 1px solid #e0e9f8;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    .menu-mobile-lien.actif {
+        background-color: #e3eeff;
+        border-color: #1A73E8;
+        color: #1A73E8;
+    }
+
+    .menu-mobile-depot {
+        background-color: #1A73E8;
+        border-color: #1A73E8;
+        color: #ffffff;
+    }
+
+    .menu-mobile-connexion {
+        background-color: #ffffff;
+        border-color: #c5d4ed;
+        color: #102b50;
+    }
+
+    /* Titre de la plateforme sous le header */
+    .titre-plateforme {
+        position: static;
+        height: auto;
+        background-color: #f4f8ff;
+        border-bottom: 1px solid #e0e8f5;
+        padding: 7px 12px;
+        pointer-events: auto;
+        text-align: center;
+    }
+
+    .titre-plateforme h2 {
+        color: #102b50;
+        font-size: 13px;
+        font-weight: 700;
+    }
+}
+
+/* ==========================================================================
+   CHAMP DE RECHERCHE PLACÉ SUR LE HÉROS EN MODE RESPONSIVE MOBILE
+   ========================================================================== */
+.hero-recherche-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .hero-recherche-mobile {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 28px);
+        max-width: 440px;
+        height: 40px;
+        padding: 0 4px 0 14px;
+        background: rgba(255, 255, 255, 0.97);
+        border: 2px solid #1A73E8;
+        border-radius: 999px;
+        box-shadow: 0 6px 18px rgba(11, 30, 68, 0.2);
+        z-index: 6;
+        box-sizing: border-box;
+    }
+
+    .hero-recherche-mobile input {
+        flex: 1;
+        min-width: 0;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-size: 13.5px;
+        color: #102b50;
+    }
+
+    .hero-recherche-mobile input::placeholder {
+        color: #5b6b82;
+    }
+
+    .hero-recherche-mobile button {
+        flex: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 30px;
+        border: none;
+        border-radius: 999px;
+        background-color: #1A73E8;
+        color: #ffffff;
+        font-size: 14px;
+        cursor: pointer;
+    }
+}

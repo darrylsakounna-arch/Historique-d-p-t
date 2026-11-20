@@ -1,0 +1,767 @@
+/* ==========================================================================
+   FICHIER : memoires.css
+   RÔLE : Mise en page des cartes de mémoires récents (3 cartes sur l'accueil)
+          et de la page complète (10 mémoires par page + pagination).
+   ========================================================================== */
+
+.section-memoires {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 45px 4% 55px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #102b50;
+}
+
+.section-memoires-entete {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.section-memoires-entete h2 {
+    margin: 0;
+    font-size: clamp(20px, 2.4vw, 28px);
+    color: #102b50;
+    border-left: 5px solid #1A73E8;
+    padding-left: 14px;
+}
+
+.section-memoires-entete p {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: #5b6b82;
+}
+
+/* ---------- GRILLE DES 3 MÉMOIRES RÉCENTS (ACCUEIL) ---------- */
+.grille-memoires-recents {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+/* ---------- GRILLE DE LA PAGE COMPLÈTE (10 MÉMOIRES PAR PAGE) ---------- */
+.grille-memoires-tous {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 26px;
+}
+
+/* ---------- STYLE D'UN CADRE / CARTE DE MÉMOIRE (FIDÈLE AU CROQUIS) ---------- */
+.carte-memoire {
+    background: #ffffff;
+    border: 2px solid #cbd7ea;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 6px 20px rgba(16, 43, 80, 0.07);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.carte-memoire:hover {
+    transform: translateY(-5px);
+    border-color: #1A73E8;
+    box-shadow: 0 12px 28px rgba(26, 115, 232, 0.16);
+}
+
+/* Zone supérieure : aperçu de la page de garde du mémoire */
+.carte-apercu {
+    position: relative;
+    height: 220px;
+    background: linear-gradient(145deg, #eaf1fc 0%, #d5e3f8 100%);
+    border-bottom: 1px solid #dce5f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.carte-apercu canvas {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+}
+
+/* Visuel de secours élégant pendant le rendu ou si le PDF n'est pas encore dessiné */
+.carte-apercu-fallback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    text-align: center;
+    color: #102b50;
+}
+
+.carte-apercu-fallback .icone-pdf {
+    width: 48px;
+    height: 58px;
+    border-radius: 8px;
+    background: #1A73E8;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(26, 115, 232, 0.3);
+}
+
+.carte-apercu-fallback span {
+    font-size: 12px;
+    font-weight: 600;
+    color: #365075;
+}
+
+/* Badge date en haut à droite de la couverture */
+.carte-badge-date {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(16, 43, 80, 0.85);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+/* Corps de la carte : Université, École/Entité, Filière, Auteur */
+.carte-corps {
+    padding: 18px 20px 14px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.carte-universite {
+    display: inline-block;
+    align-self: flex-start;
+    background: #e1f3e8;
+    color: #087B50;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 8px;
+}
+
+.carte-entite {
+    margin: 2px 0 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #102b50;
+    line-height: 1.35;
+}
+
+.carte-detail {
+    margin: 0;
+    font-size: 13.5px;
+    color: #465872;
+    line-height: 1.45;
+}
+
+.carte-detail strong {
+    color: #102b50;
+}
+
+/* Bas de la carte : lien "Voir plus" aligné en bas à droite comme sur ton croquis */
+.carte-pied {
+    padding: 10px 20px 16px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.carte-lien-voir {
+    background: none;
+    border: none;
+    padding: 4px 6px;
+    color: #1A73E8;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.carte-lien-voir:hover {
+    color: #0d4ea6;
+}
+
+/* ---------- BOUTON "Voir plus ->" EN BAS À DROITE SOUS LES 3 CARTES ---------- */
+.zone-bouton-voir-plus {
+    margin-top: 26px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.bouton-voir-plus-global {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background-color: #ffffff;
+    color: #102b50;
+    border: 2px solid #102b50;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.bouton-voir-plus-global:hover {
+    background-color: #1A73E8;
+    border-color: #1A73E8;
+    color: #ffffff;
+}
+
+/* ---------- CHARGEMENT (SPINNER) & ÉTAT VIDE ---------- */
+.zone-chargement-memoires {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 14px;
+    color: #465872;
+    font-size: 15px;
+}
+
+.message-aucun-memoire {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    background: #f4f8ff;
+    border: 1px dashed #b8c9e6;
+    border-radius: 16px;
+    color: #365075;
+}
+
+.message-aucun-memoire a {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 20px;
+    background: #1A73E8;
+    color: #ffffff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* ---------- PAGINATION (10 MÉMOIRES PAR PAGE + BOUTON SUIVANT) ---------- */
+.barre-filtres-memoires {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 26px;
+    background: #f4f8ff;
+    padding: 16px 20px;
+    border-radius: 14px;
+    border: 1px solid #d9e5f7;
+}
+
+.barre-filtres-memoires input {
+    flex: 1;
+    min-width: 220px;
+    height: 44px;
+    padding: 0 16px;
+    border: 1px solid #bfd0ea;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+    background: #ffffff;
+    box-shadow: none;
+}
+
+.barre-filtres-memoires input:focus {
+    border-color: #1A73E8;
+}
+
+.barre-filtres-memoires button {
+    height: 44px;
+    padding: 0 22px;
+    background: #1A73E8;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.pagination-memoires {
+    margin-top: 34px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding-top: 20px;
+    border-top: 1px solid #dce5f2;
+}
+
+.pagination-info {
+    font-size: 14px;
+    color: #465872;
+    font-weight: 600;
+}
+
+.pagination-boutons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-pagination {
+    padding: 10px 18px;
+    background: #1A73E8;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-pagination:hover:not(:disabled) {
+    background: #145bbd;
+}
+
+.btn-pagination:disabled {
+    background: #cbd7ea;
+    color: #6c7d96;
+    cursor: not-allowed;
+}
+
+/* ---------- FENÊTRE MODALE DE DÉTAIL D'UN MÉMOIRE ---------- */
+.modal-memoire {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(11, 30, 68, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-memoire[hidden] {
+    display: none;
+}
+
+.modal-memoire-boite {
+    background: #ffffff;
+    width: 100%;
+    max-width: 680px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 18px;
+    padding: 26px 28px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+    position: relative;
+}
+
+.modal-fermer {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    background: #eef3fb;
+    color: #102b50;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.modal-memoire-boite h3 {
+    margin: 0 36px 14px 0;
+    color: #1A73E8;
+    font-size: 21px;
+}
+
+.modal-liste-infos {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 18px;
+}
+
+.modal-liste-infos li {
+    background: #f6f9ff;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.modal-btn-pdf {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: #087B50;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* ---------- RESPONSIVE MOBILE & TABLETTE ---------- */
+@media (max-width: 950px) {
+    .grille-memoires-recents {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+    .grille-memoires-recents {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-liste-infos {
+        grid-template-columns: 1fr;
+    }
+
+    .zone-bouton-voir-plus {
+        justify-content: center;
+    }
+}
+
+
+/* ==========================================================================
+   HÉROS EN ARRIÈRE-PLAN SUR memoires.html (images/illustration-academique.png)
+   Style doux et lumineux comme la page d'accueil + filtres intégrés dessus
+   ========================================================================== */
+.heros-memoires {
+    position: relative;
+    width: 100%;
+    min-height: 370px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f4f8ff 0%, #d9e5f7 100%);
+    color: #0b1e44;
+    padding: 42px 4% 34px;
+    box-sizing: border-box;
+    border-bottom: 2px solid #cbd9f0;
+    gap: 28px;
+}
+
+.heros-memoires-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 86%;
+    max-width: 78%;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.45;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.heros-memoires-contenu {
+    position: relative;
+    z-index: 2;
+    max-width: 820px;
+    margin-top: 6px;
+}
+
+.heros-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    margin-bottom: 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1.5px solid #b8cef0;
+    color: #1A73E8;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(11, 30, 68, 0.06);
+}
+
+.heros-memoires-contenu h1 {
+    margin: 0 0 8px;
+    font-size: clamp(25px, 3.4vw, 38px);
+    font-weight: 800;
+    color: #0b1e44;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.heros-memoires-contenu p {
+    margin: 0;
+    font-size: 15.5px;
+    font-weight: 600;
+    color: #2c436b;
+}
+
+.section-memoires-archives {
+    padding-top: 32px;
+}
+
+/* ==========================================================================
+   ZONE OUTILS SUR LE HÉROS : FILTRE EN CASCADE À GAUCHE + RECHERCHE À DROITE
+   ========================================================================== */
+.zone-outils-memoires {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2.35fr 1fr;
+    gap: 18px;
+    align-items: stretch;
+    text-align: left;
+}
+
+.bloc-filtre-cascade,
+.bloc-recherche-droite {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1.5px solid #c3d5f0;
+    border-radius: 16px;
+    padding: 15px 18px;
+    box-shadow: 0 8px 24px rgba(11, 30, 68, 0.10);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.bloc-outil-titre {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #102b50;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.btn-reset-filtres {
+    background: #e2e8f0;
+    color: #334155;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11.5px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: none;
+}
+
+.btn-reset-filtres:hover {
+    background: #cbd5e1;
+}
+
+.grille-selects-cascade {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.filtre-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.filtre-item label {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #355078;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.filtre-item select {
+    width: 100%;
+    height: 40px;
+    padding: 0 8px;
+    border: 1.5px solid #bfd0ea;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #102b50;
+    font-size: 13px;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    box-shadow: none;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.filtre-item select:focus {
+    border-color: #1A73E8;
+}
+
+.filtre-item select:disabled {
+    background-color: #eef3fb;
+    color: #7d8fa8;
+    border-color: #d3dfef;
+    cursor: not-allowed;
+}
+
+/* Bloc recherche compact à droite */
+.champ-recherche-compact {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    background: #ffffff;
+    border: 1.5px solid #bfd0ea;
+    border-radius: 10px;
+    padding: 0 4px 0 12px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.champ-recherche-compact:focus-within {
+    border-color: #1A73E8;
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.14);
+}
+
+.champ-recherche-compact input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 13.5px;
+    color: #102b50;
+    box-shadow: none;
+}
+
+.champ-recherche-compact button {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    background-color: #1A73E8;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.15s;
+}
+
+.champ-recherche-compact button:hover {
+    background-color: #1258b8;
+    transform: scale(1.04);
+}
+
+/* ==========================================================================
+   PAGINATION 3 ZONES :
+   - Précédent à gauche en couleur grise
+   - Page 1 sur 1 au milieu
+   - Suivant à droite en bleu (couleur conservée)
+   ========================================================================== */
+.pagination-trois-zones {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-pagination-precedent {
+    justify-self: start;
+    background-color: #6c757d;
+    color: #ffffff;
+}
+
+.btn-pagination-precedent:hover:not(:disabled) {
+    background-color: #545b62;
+}
+
+.btn-pagination-precedent:disabled {
+    background-color: #d6dbe0;
+    color: #7c858e;
+    cursor: not-allowed;
+}
+
+.pagination-trois-zones .pagination-info {
+    justify-self: center;
+    text-align: center;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #102b50;
+}
+
+.btn-pagination-suivant {
+    justify-self: end;
+    background-color: #1A73E8;
+    color: #ffffff;
+}
+
+@media (max-width: 1050px) {
+    .zone-outils-memoires {
+        grid-template-columns: 1fr;
+    }
+
+    .grille-selects-cascade {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .heros-memoires {
+        min-height: 410px;
+        padding: 68px 14px 24px;
+    }
+
+    .heros-memoires-bg {
+        height: 62%;
+        max-width: 85%;
+    }
+}
+
+@media (max-width: 650px) {
+    .grille-selects-cascade {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .pagination-trois-zones {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .btn-pagination-precedent,
+    .btn-pagination-suivant {
+        justify-self: stretch;
+        width: 100%;
+    }
+}
